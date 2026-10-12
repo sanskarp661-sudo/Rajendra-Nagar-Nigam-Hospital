@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("Departments & services", "विभाग और सेवाएँ", "Care under one roof.", "एक ही छत के नीचे देखभाल।", "From 24×7 emergency and intensive care to diagnostics and physiotherapy. Choose a department to see conditions treated, doctors and timings.", "24×7 आपातकालीन और गहन चिकित्सा से लेकर जाँच और फिजियोथेरेपी तक। इलाज की जाने वाली बीमारियाँ, डॉक्टर और समय देखने के लिए विभाग चुनें।", [("departments/", "Departments", "विभाग")]) }}
+
+<section class="list-sec">
+  <div class="wrap">
+    <div class="filters" role="group" data-aria-en="Filter departments" data-aria-hi="विभाग फ़िल्टर करें">
+      <button class="filter" type="button" data-dept-filter="all" aria-pressed="true" data-en="All" data-hi="सभी"></button>
+      <button class="filter" type="button" data-dept-filter="care" aria-pressed="false" data-en="Hospital care" data-hi="अस्पताल सेवाएँ"></button>
+      <button class="filter" type="button" data-dept-filter="diagnostics" aria-pressed="false" data-en="Diagnostics" data-hi="जाँच सेवाएँ"></button>
+      <button class="filter" type="button" data-dept-filter="support" aria-pressed="false" data-en="Support services" data-hi="सहायक सेवाएँ"></button>
+    </div>
+    <div class="dept-grid" id="dept-grid">
+      {% for d in depts %}{{ m.dept_card(d) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <div class="wrap cta-in">
+    <div>
+      <h2 class="h2-sm" data-en="Not sure which department you need?" data-hi="समझ नहीं आ रहा कि कौन-सा विभाग चाहिए?"></h2>
+      <p data-en="Use the visit guide, or call the hospital and we’ll point you to the right doctor." data-hi="विज़िट गाइड देखें, या अस्पताल में कॉल करें, हम सही डॉक्टर बताएँगे।"></p>
+    </div>
+    <div class="acts">
+      <button class="btn" type="button" data-open-guide>{{ m.ico('guide') }}<span data-en="Help me plan my visit" data-hi="विज़िट की तैयारी में सहायता"></span></button>
+      <a class="btn ghost" href="tel:{{ site.phone }}">{{ m.ico('phone') }}{{ site.phone_display }}</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

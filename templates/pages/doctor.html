@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{% set dept = dept_by_slug[doc.dept] %}
+<div class="page-head doc-head">
+  <div class="wrap">
+    <nav class="crumbs" data-aria-en="Breadcrumb" data-aria-hi="ब्रेडक्रंब">
+      <a href="{{ u('') }}" data-en="Home" data-hi="होम"></a><span aria-hidden="true">/</span><a href="{{ u('doctors/') }}" data-en="Doctors" data-hi="डॉक्टर"></a><span aria-hidden="true">/</span><a href="{{ u('doctors/' ~ doc.slug ~ '/') }}" aria-current="page">{{ doc.name|l }}</a>
+    </nav>
+    <div class="doc-hero">
+      {{ m.avatar(doc, 'xl') }}
+      <div>
+        <span class="kicker on-dark">{{ dept.name|l }}</span>
+        <h1>{{ doc.name|l }} {{ m.sample() }}</h1>
+        <p class="lede">{{ doc.title|l }} · {{ doc.qual }}</p>
+        <ul class="chips">
+          <li>{{ m.ico('shield') }}{{ doc.exp }} <span data-en="years’ experience" data-hi="वर्ष का अनुभव"></span></li>
+          <li>{{ m.ico('lang') }}{% for l in doc.langs %}{{ l|l }}{% if not loop.last %}, {% endif %}{% endfor %}</li>
+          {% if doc.bookable %}<li>{{ m.ico('rupee') }}{{ rupee(doc.fee) }} <span data-en="consultation" data-hi="परामर्श"></span></li>{% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="doc-profile">
+  <div class="wrap profile-grid">
+    <div class="profile-main">
+      <h2 class="h3" data-en="About" data-hi="परिचय"></h2>
+      <p class="big-p">{{ doc.bio|l }}</p>
+      <h2 class="h3" data-en="Areas of interest" data-hi="विशेष रुचि"></h2>
+      <ul class="tick-list">{% for i in doc.interests %}<li>{{ m.ico('check') }}{{ i|l }}</li>{% endfor %}</ul>
+      <h2 class="h3" data-en="Qualifications" data-hi="योग्यता"></h2>
+      <p>{{ doc.qual }}</p>
+      <h2 class="h3" data-en="Department" data-hi="विभाग"></h2>
+      <p><a class="link" href="{{ u('departments/' ~ dept.slug ~ '/') }}">{{ dept.name|l }}</a></p>
+    </div>
+    <div class="profile-side">
+      <div class="card-box">
+        <h2 class="h3" data-en="OPD timings" data-hi="OPD समय"></h2>
+        {% if doc.bookable %}
+        <table class="week" data-week>
+          <tbody>
+          {% for r in week_table(doc) %}
+            <tr data-day="{{ r.day }}"><th scope="row">{{ r.name }}</th><td>{% if r.times %}{{ r.times|join(', ') }}{% else %}<span class="muted" data-en="Not available" data-hi="उपलब्ध नहीं"></span>{% endif %}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        <p class="next-slot" data-next-slot data-doctor="{{ doc.slug }}" hidden></p>
+        <a class="btn block" href="{{ u('book/') }}?doctor={{ doc.slug }}">{{ m.ico('calendar') }}<span data-en="Book an appointment" data-hi="अपॉइंटमेंट बुक करें"></span></a>
+        <a class="btn ghost block" href="tel:{{ site.phone }}">{{ m.ico('phone') }}<span data-en="Call to confirm" data-hi="पुष्टि के लिए कॉल करें"></span></a>
+        {% else %}
+        <p data-en="Part of the 24×7 emergency team. No appointment needed: come directly or call ahead." data-hi="24×7 आपातकालीन टीम का हिस्सा। अपॉइंटमेंट की ज़रूरत नहीं: सीधे आएँ या पहले कॉल करें।"></p>
+        <a class="btn emergency block" href="tel:{{ site.emergency_phone }}">{{ m.ico('phone') }}<span data-en="Call emergency" data-hi="आपातकालीन कॉल करें"></span></a>
+        {% endif %}
+        <p class="fine" data-en="Timings can change. The hospital confirms every appointment by phone." data-hi="समय बदल सकता है। अस्पताल हर अपॉइंटमेंट की पुष्टि फ़ोन पर करता है।"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% set others = docs_in(doc.dept)|rejectattr('slug', 'equalto', doc.slug)|list %}
+{% if others %}
+<section class="related">
+  <div class="wrap">
+    <h2 class="h2-sm" data-en="Other doctors in this department" data-hi="इस विभाग के अन्य डॉक्टर"></h2>
+    <div class="doc-grid">{% for d in others %}{{ m.doctor_card(d) }}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

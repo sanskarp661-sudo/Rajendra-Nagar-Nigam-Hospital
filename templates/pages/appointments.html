@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("My appointments", "मेरे अपॉइंटमेंट", "Your requests.", "आपके अनुरोध।", "Appointment requests you made on this device. Send them to the hospital, add them to your calendar, or cancel.", "इस डिवाइस से किए गए अपॉइंटमेंट अनुरोध। इन्हें अस्पताल को भेजें, कैलेंडर में जोड़ें, या रद्द करें।", [("my-appointments/", "My appointments", "मेरे अपॉइंटमेंट")]) }}
+<section class="list-sec">
+  <div class="wrap narrow">
+    <div id="appt-list" class="appt-list" aria-live="polite"></div>
+    <div class="empty" id="appt-empty" hidden>
+      {{ m.ico('calendar') }}
+      <p data-en="No appointment requests on this device yet." data-hi="इस डिवाइस पर अभी कोई अपॉइंटमेंट अनुरोध नहीं है।"></p>
+      <a class="btn" href="{{ u('book/') }}">{{ m.ico('calendar') }}<span data-en="Book an appointment" data-hi="अपॉइंटमेंट बुक करें"></span></a>
+    </div>
+    <p class="fine" data-en="Requests are stored only in this browser. Clearing your browser data removes them; the hospital keeps its own record once you’ve sent the request." data-hi="अनुरोध केवल इसी ब्राउज़र में सेव हैं। ब्राउज़र डेटा हटाने पर ये हट जाएँगे; अनुरोध भेजने के बाद अस्पताल अपना रिकॉर्ड रखता है।"></p>
+    <noscript><p data-en="This page needs JavaScript. To check an appointment, call the hospital." data-hi="इस पेज के लिए JavaScript ज़रूरी है। अपॉइंटमेंट जानने के लिए अस्पताल में कॉल करें।"></p></noscript>
+  </div>
+</section>
+{% endblock %}

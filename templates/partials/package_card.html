@@ -1,0 +1,17 @@
+<article class="pkg-card" id="pkg-{{ p.id }}">
+  <div class="pkg-top">
+    <h3>{{ p.name|l }}</h3>
+    <p>{{ p.for|l }}</p>
+  </div>
+  <div class="pkg-price"><b>{{ rupee(p.price) }}</b><s>{{ rupee(p.mrp) }}</s>{{ m.sample() }}</div>
+  <ul class="pkg-meta">
+    <li><svg class="i" aria-hidden="true"><use href="#i-list"/></svg><span>{{ p.tests|length }} <span data-en="tests &amp; services" data-hi="जाँच और सेवाएँ"></span></span></li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><span><span data-en="Reports:" data-hi="रिपोर्ट:"></span> {{ p.report|l }}</span></li>
+    {% if p.fasting %}<li><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span data-en="10–12 hours fasting needed" data-hi="10–12 घंटे खाली पेट रहना ज़रूरी"></span></li>{% endif %}
+  </ul>
+  <details class="pkg-tests">
+    <summary><span data-en="What’s included" data-hi="क्या शामिल है"></span><svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+    <ul>{% for t in p.tests %}<li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>{{ t }}</li>{% endfor %}</ul>
+  </details>
+  <a class="btn" href="{{ u('book/') }}?type=checkup&amp;package={{ p.id }}"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book this package" data-hi="यह पैकेज बुक करें"></span></a>
+</article>

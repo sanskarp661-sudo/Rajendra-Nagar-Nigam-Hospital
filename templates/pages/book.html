@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("Book an appointment", "अपॉइंटमेंट बुक करें", "Book in a few steps.", "कुछ आसान चरणों में बुक करें।", "Choose a doctor, check-up or lab test, then a date and time. You’ll send the request to the hospital on WhatsApp, and they’ll call to confirm.", "डॉक्टर, चेक-अप या लैब जाँच चुनें, फिर तारीख़ और समय। आप WhatsApp पर अस्पताल को अनुरोध भेजेंगे, और वे पुष्टि के लिए कॉल करेंगे।", [("book/", "Book appointment", "अपॉइंटमेंट बुक करें")]) }}
+
+<section class="book-sec">
+  <div class="wrap book-grid">
+    <div class="book-main">
+      <noscript>
+        <div class="card-box">
+          <h2 class="h3" data-en="Online booking needs JavaScript" data-hi="ऑनलाइन बुकिंग के लिए JavaScript ज़रूरी है"></h2>
+          <p data-en="You can still book by phone or WhatsApp." data-hi="आप फ़ोन या WhatsApp से भी बुक कर सकते हैं।"></p>
+          <p><a class="btn" href="tel:{{ site.phone }}">{{ site.phone_display }}</a> <a class="btn ghost" href="https://wa.me/{{ site.whatsapp }}">WhatsApp</a></p>
+        </div>
+      </noscript>
+
+      <ol class="stepper" id="stepper" aria-hidden="true">
+        <li data-en="Service" data-hi="सेवा"></li>
+        <li data-en="Choose" data-hi="चुनें"></li>
+        <li data-en="Date & time" data-hi="तारीख़ और समय"></li>
+        <li data-en="Details" data-hi="जानकारी"></li>
+        <li data-en="Review" data-hi="समीक्षा"></li>
+      </ol>
+
+      <form id="book-form" class="book-form" novalidate hidden>
+        <p class="step-count" id="step-count" aria-live="polite"></p>
+
+        <!-- Step 1 -->
+        <fieldset class="bstep" data-step="1">
+          <legend class="step-title" data-en="What would you like to book?" data-hi="आप क्या बुक करना चाहते हैं?"></legend>
+          <div class="choice-cards three">
+            <label class="ccard"><input type="radio" name="type" value="consultation" checked><span class="ccard-in">{{ m.ico('steth') }}<b data-en="Doctor consultation" data-hi="डॉक्टर से परामर्श"></b><small data-en="See a doctor in the OPD, from ₹500" data-hi="OPD में डॉक्टर से मिलें, ₹500 से"></small></span></label>
+            <label class="ccard"><input type="radio" name="type" value="checkup"><span class="ccard-in">{{ m.ico('shield') }}<b data-en="Health check-up" data-hi="हेल्थ चेक-अप"></b><small data-en="Packages from ₹999" data-hi="पैकेज ₹999 से"></small></span></label>
+            <label class="ccard"><input type="radio" name="type" value="lab"><span class="ccard-in">{{ m.ico('flask') }}<b data-en="Lab tests & scans" data-hi="लैब जाँच और स्कैन"></b><small data-en="Blood tests, ultrasound, X-ray, ECG" data-hi="खून जाँच, अल्ट्रासाउंड, एक्स-रे, ECG"></small></span></label>
+          </div>
+          <p class="em-note">{{ m.ico('cross') }}<span><span data-en="Emergency? Don’t book online." data-hi="आपातकाल है? ऑनलाइन बुक न करें।"></span> <a href="tel:{{ site.emergency_phone }}" data-en="Call 8757731665 now" data-hi="अभी 8757731665 पर कॉल करें"></a></span></p>
+        </fieldset>
+
+        <!-- Step 2 -->
+        <fieldset class="bstep" data-step="2" hidden>
+          <legend class="step-title" id="s2-title"></legend>
+          <div data-for="consultation">
+            <div class="field">
+              <label for="bk-dept" data-en="Department" data-hi="विभाग"></label>
+              <select id="bk-dept" name="dept">
+                <option value="" data-en="All departments" data-hi="सभी विभाग"></option>
+                {% for d in depts if docs_in(d.slug)|selectattr('bookable')|list %}<option value="{{ d.slug }}">{{ d.name|l }}</option>{% endfor %}
+              </select>
+            </div>
+            <div class="pick-list" id="bk-doctors" role="radiogroup" data-aria-en="Doctors" data-aria-hi="डॉक्टर"></div>
+          </div>
+          <div data-for="checkup" hidden>
+            <div class="pick-list" id="bk-packages" role="radiogroup" data-aria-en="Health check-up packages" data-aria-hi="हेल्थ चेक-अप पैकेज"></div>
+          </div>
+          <div data-for="lab" hidden>
+            <div class="field">
+              <label for="bk-test-q" data-en="Find tests" data-hi="जाँच खोजें"></label>
+              <div class="input-ico">{{ m.ico('search') }}<input id="bk-test-q" type="search" autocomplete="off" data-ph-en="e.g. CBC, thyroid, ultrasound" data-ph-hi="जैसे CBC, थायरॉइड, अल्ट्रासाउंड"></div>
+            </div>
+            <div class="test-pick" id="bk-tests"></div>
+            <p class="test-total" id="bk-test-total" aria-live="polite"></p>
+          </div>
+          <p class="err" data-err="2" hidden></p>
+        </fieldset>
+
+        <!-- Step 3 -->
+        <fieldset class="bstep" data-step="3" hidden>
+          <legend class="step-title" data-en="Choose a date and time" data-hi="तारीख़ और समय चुनें"></legend>
+          <p class="step-sub" id="s3-sub"></p>
+          <div class="date-strip" id="bk-dates" role="radiogroup" data-aria-en="Date" data-aria-hi="तारीख़"></div>
+          <div class="slots" id="bk-slots" role="radiogroup" data-aria-en="Time" data-aria-hi="समय"></div>
+          <p class="err" data-err="3" hidden></p>
+          <p class="fine" data-en="Times are in Indian Standard Time. Greyed-out slots are already requested or have passed." data-hi="समय भारतीय मानक समय में है। धूसर समय पहले से अनुरोधित हैं या बीत चुके हैं।"></p>
+        </fieldset>
+
+        <!-- Step 4 -->
+        <fieldset class="bstep" data-step="4" hidden>
+          <legend class="step-title" data-en="Patient details" data-hi="मरीज़ की जानकारी"></legend>
+          <div class="form-grid">
+            <div class="field span2">
+              <label for="bk-name" data-en="Patient’s full name" data-hi="मरीज़ का पूरा नाम"></label>
+              <input id="bk-name" name="name" type="text" autocomplete="name" required maxlength="80">
+              <p class="err" data-err-for="name" hidden></p>
+            </div>
+            <div class="field">
+              <label for="bk-phone" data-en="Mobile number" data-hi="मोबाइल नंबर"></label>
+              <div class="input-pre"><span>+91</span><input id="bk-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required maxlength="10" pattern="[6-9][0-9]{9}"></div>
+              <p class="err" data-err-for="phone" hidden></p>
+            </div>
+            <div class="field">
+              <label for="bk-age" data-en="Age" data-hi="उम्र"></label>
+              <input id="bk-age" name="age" type="number" inputmode="numeric" min="0" max="120" required>
+              <p class="err" data-err-for="age" hidden></p>
+            </div>
+            <fieldset class="field span2 radio-row">
+              <legend data-en="Gender" data-hi="लिंग"></legend>
+              <label><input type="radio" name="gender" value="female"><span data-en="Female" data-hi="महिला"></span></label>
+              <label><input type="radio" name="gender" value="male"><span data-en="Male" data-hi="पुरुष"></span></label>
+              <label><input type="radio" name="gender" value="other"><span data-en="Other" data-hi="अन्य"></span></label>
+              <p class="err" data-err-for="gender" hidden></p>
+            </fieldset>
+            <fieldset class="field span2 radio-row">
+              <legend data-en="Have you visited this hospital before?" data-hi="क्या आप पहले इस अस्पताल आए हैं?"></legend>
+              <label><input type="radio" name="visit" value="new" checked><span data-en="No, first visit" data-hi="नहीं, पहली बार"></span></label>
+              <label><input type="radio" name="visit" value="returning"><span data-en="Yes, returning" data-hi="हाँ, पहले आ चुके हैं"></span></label>
+            </fieldset>
+            <div class="field span2">
+              <label for="bk-notes"><span data-en="Reason for visit" data-hi="विज़िट का कारण"></span> <span class="muted" data-en="(optional)" data-hi="(वैकल्पिक)"></span></label>
+              <textarea id="bk-notes" name="notes" rows="3" maxlength="300" data-ph-en="e.g. fever for 3 days, follow-up, report review" data-ph-hi="जैसे 3 दिन से बुखार, फ़ॉलो-अप, रिपोर्ट दिखाना"></textarea>
+            </div>
+          </div>
+          <p class="fine" data-en="Your details stay on this device and are only sent when you choose to message the hospital." data-hi="आपकी जानकारी इसी डिवाइस पर रहती है और तभी भेजी जाती है जब आप अस्पताल को संदेश भेजते हैं।"></p>
+        </fieldset>
+
+        <!-- Step 5 -->
+        <fieldset class="bstep" data-step="5" hidden>
+          <legend class="step-title" data-en="Review your request" data-hi="अपना अनुरोध जाँचें"></legend>
+          <dl class="review" id="bk-review"></dl>
+          <label class="consent"><input type="checkbox" id="bk-consent"><span data-en="I understand this is a request. The hospital will call to confirm the time, and the fee may vary." data-hi="मैं समझता/समझती हूँ कि यह एक अनुरोध है। अस्पताल समय की पुष्टि के लिए कॉल करेगा, और शुल्क अलग हो सकता है।"></span></label>
+          <p class="err" data-err="5" hidden></p>
+        </fieldset>
+
+        <div class="step-nav">
+          <button class="btn ghost" type="button" id="bk-back" hidden>{{ m.ico('arrow', 'flip') }}<span data-en="Back" data-hi="पीछे"></span></button>
+          <button class="btn" type="button" id="bk-next"><span data-en="Continue" data-hi="आगे बढ़ें"></span>{{ m.ico('arrow') }}</button>
+          <button class="btn" type="submit" id="bk-submit" hidden>{{ m.ico('check') }}<span data-en="Confirm request" data-hi="अनुरोध की पुष्टि करें"></span></button>
+        </div>
+      </form>
+
+      <div class="confirm" id="bk-done" hidden tabindex="-1">
+        <div class="confirm-head">
+          <span class="ok">{{ m.ico('check') }}</span>
+          <div>
+            <h2 data-en="Request ready to send" data-hi="अनुरोध भेजने के लिए तैयार"></h2>
+            <p data-en="Last step: send it to the hospital on WhatsApp. They’ll call you to confirm." data-hi="आख़िरी चरण: इसे WhatsApp पर अस्पताल को भेजें। वे पुष्टि के लिए आपको कॉल करेंगे।"></p>
+          </div>
+        </div>
+        <dl class="review" id="bk-done-review"></dl>
+        <div class="confirm-acts">
+          <a class="btn wa" id="bk-wa" href="#" target="_blank" rel="noopener">{{ m.ico('wa') }}<span data-en="Send on WhatsApp" data-hi="WhatsApp पर भेजें"></span></a>
+          <a class="btn ghost" href="tel:{{ site.phone }}">{{ m.ico('phone') }}<span data-en="Or call to confirm" data-hi="या पुष्टि के लिए कॉल करें"></span></a>
+          <button class="btn ghost" type="button" id="bk-ics">{{ m.ico('download') }}<span data-en="Add to calendar" data-hi="कैलेंडर में जोड़ें"></span></button>
+          <button class="btn ghost" type="button" id="bk-print">{{ m.ico('print') }}<span data-en="Print" data-hi="प्रिंट करें"></span></button>
+        </div>
+        <p class="fine">{% if site.whatsapp_sample %}{{ m.sample() }} {% endif %}<span data-en="Saved on this device in" data-hi="इस डिवाइस पर सेव किया गया:"></span> <a class="link" href="{{ u('my-appointments/') }}" data-en="My appointments" data-hi="मेरे अपॉइंटमेंट"></a>. <button class="link" type="button" id="bk-again" data-en="Book another" data-hi="एक और बुक करें"></button></p>
+      </div>
+    </div>
+
+    <div class="book-side">
+      <div class="card-box sticky">
+        <h2 class="h3" data-en="Your booking" data-hi="आपकी बुकिंग"></h2>
+        <dl class="summary" id="bk-summary"><div><dt data-en="Service" data-hi="सेवा"></dt><dd data-en="Doctor consultation" data-hi="डॉक्टर से परामर्श"></dd></div></dl>
+        <hr>
+        <ul class="tick-list sm">
+          <li>{{ m.ico('check') }}<span data-en="The hospital confirms every request by phone" data-hi="अस्पताल हर अनुरोध की पुष्टि फ़ोन पर करता है"></span></li>
+          <li>{{ m.ico('check') }}<span data-en="Pay at the hospital; no online payment" data-hi="भुगतान अस्पताल में; कोई ऑनलाइन भुगतान नहीं"></span></li>
+          <li>{{ m.ico('check') }}<span data-en="Bring previous prescriptions and reports" data-hi="पिछले पर्चे और रिपोर्ट साथ लाएँ"></span></li>
+        </ul>
+        <a class="btn ghost block" href="tel:{{ site.phone }}">{{ m.ico('phone') }}<span data-en="Prefer to call?" data-hi="कॉल करना चाहते हैं?"></span> {{ site.phone_display }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

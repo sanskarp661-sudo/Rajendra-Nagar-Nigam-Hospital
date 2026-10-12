@@ -1,0 +1,9 @@
+<div class="card-box">
+  <table class="hours">
+    <tbody>
+    {% for h in site.hours %}
+      <tr data-hours="{{ h.key }}"><th scope="row">{{ h.label|l }}</th><td>{{ h.value|l }}{% if h.sample %} {{ m.sample() }}{% endif %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

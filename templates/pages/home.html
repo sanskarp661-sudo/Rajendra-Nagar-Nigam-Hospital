@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block preload %}<link rel="preload" as="image" href="/assets/hero-1280.webp" imagesrcset="/assets/hero-640.webp 640w, /assets/hero-800.webp 800w, /assets/hero-960.webp 960w, /assets/hero-1280.webp 1280w, /assets/hero.webp 1536w" imagesizes="100vw" fetchpriority="high">{% endblock %}
+{% block main %}
+
+  <div class="hero" id="home">
+    <div class="hero-img" id="slides">
+      <img class="slide is-on" src="/assets/hero-1280.webp" srcset="/assets/hero-640.webp 640w, /assets/hero-800.webp 800w, /assets/hero-960.webp 960w, /assets/hero-1280.webp 1280w, /assets/hero.webp 1536w" sizes="100vw" width="1536" height="1024" fetchpriority="high" data-alt-en="AI illustration of a clinician speaking with a patient" data-alt-hi="डॉक्टर और मरीज की बातचीत का AI चित्र">
+      <img class="slide flip" src="/assets/lab-1280.webp" srcset="/assets/lab-640.webp 640w, /assets/lab-960.webp 960w, /assets/lab-1280.webp 1280w, /assets/lab.webp 1536w" sizes="100vw" width="1536" height="1024" loading="lazy" data-alt-en="AI illustration of laboratory testing" data-alt-hi="प्रयोगशाला जाँच का AI चित्र">
+    </div>
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <span class="status" id="status"><i class="live" aria-hidden="true"></i><span id="status-text" data-tpl-en="Emergency open now · {t} in Ranchi" data-tpl-hi="आपातकालीन सेवा अभी खुली · रांची में {t}" data-en="Emergency open 24×7 · Ratu Road Chowk, Ranchi" data-hi="आपातकालीन सेवा 24×7 · रातू रोड चौक, रांची"></span></span>
+        <h1 data-en="Care that feels closer to home." data-hi="आपकी सेहत।<br>हमारी प्राथमिकता।"></h1>
+        <p class="lede" data-en="Hospital care and diagnostic services, together at Ratu Road Chowk, Ranchi." data-hi="रातू रोड चौक, रांची में अस्पताल और जाँच सेवाएँ, एक ही स्थान पर।"></p>
+        <div class="hero-actions">
+          <a class="btn light" href="{{ u('book/') }}"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book an appointment" data-hi="अपॉइंटमेंट बुक करें"></span></a>
+          <a class="btn outline-light" href="{{ site.directions_url }}" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span data-en="Get directions" data-hi="रास्ता देखें"></span></a>
+        </div>
+      </div>
+    </div>
+    <span class="ai-note" data-en="AI-created illustrative image" data-hi="AI से बनाया गया सांकेतिक चित्र"></span>
+    <div class="slide-ctrl" role="group" data-aria-en="Hero images" data-aria-hi="मुख्य चित्र">
+      <button class="dot-btn is-on" type="button" data-slide="0" aria-pressed="true"><span class="bar"><i></i></span><span data-en="Consultations" data-hi="परामर्श"></span></button>
+      <button class="dot-btn" type="button" data-slide="1" aria-pressed="false"><span class="bar"><i></i></span><span data-en="Diagnostics" data-hi="जाँच सेवाएँ"></span></button>
+      <button class="play-btn" type="button" id="slide-toggle" data-aria-en="Pause slideshow" data-aria-hi="स्लाइडशो रोकें" data-play-en="Play slideshow" data-play-hi="स्लाइडशो चलाएँ" data-pause-en="Pause slideshow" data-pause-hi="स्लाइडशो रोकें"><svg class="i" aria-hidden="true"><use href="#i-pause"/></svg></button>
+    </div>
+  </div>
+
+  <div class="tasks">
+    <div class="wrap">
+      <nav data-aria-en="What do you need?" data-aria-hi="आपको क्या चाहिए?">
+        <div class="task-grid" data-reveal>
+          <a class="task em" href="tel:{{ site.phone }}">
+            <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg></span>
+            <svg class="i go" aria-hidden="true"><use href="#i-out"/></svg>
+            <b data-en="Emergency, 24×7" data-hi="आपातकालीन सेवा, 24×7"></b>
+            <span class="num">8757731665</span>
+          </a>
+          <a class="task" href="{{ u('book/') }}">
+            <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+            <svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <b data-en="Book an appointment" data-hi="अपॉइंटमेंट बुक करें"></b>
+            <span data-en="Pick a doctor and time, from ₹500" data-hi="डॉक्टर और समय चुनें, ₹500 से"></span>
+          </a>
+          <a class="task" href="{{ u('doctors/') }}">
+            <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-steth"/></svg></span>
+            <svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <b data-en="Find a doctor" data-hi="डॉक्टर खोजें"></b>
+            <span data-en="Search by name, department or day" data-hi="नाम, विभाग या दिन से खोजें"></span>
+          </a>
+          <a class="task" href="{{ u('lab-tests/') }}">
+            <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg></span>
+            <svg class="i go" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <b data-en="Lab tests &amp; prices" data-hi="लैब जाँच और कीमतें"></b>
+            <span data-en="Lab, ultrasound, X-ray, ECG" data-hi="लैब, अल्ट्रासाउंड, एक्स-रे, ECG"></span>
+          </a>
+        </div>
+      </nav>
+      <div class="not-sure">
+        <p data-en="Not sure where to start? Choose a service and see what to confirm before you come." data-hi="समझ नहीं आ रहा कहाँ से शुरू करें? सेवा चुनें और जानें कि आने से पहले किन बातों की पुष्टि करें।"></p>
+        <button class="guide-trigger" type="button" data-open-guide><svg class="i" aria-hidden="true"><use href="#i-guide"/></svg><span data-en="Help me plan my visit" data-hi="विज़िट की तैयारी में सहायता"></span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="wrap">
+      <ul class="fact-grid">
+        <li class="fact" data-reveal><b data-count="24" data-suffix="×7">24×7</b><span data-en="Emergency care, as advertised by the hospital" data-hi="आपातकालीन सेवा, जैसा अस्पताल द्वारा बताया गया"></span></li>
+        <li class="fact" data-reveal><b data-count="500" data-prefix="₹">₹500</b><span data-en="Consultations start at" data-hi="से परामर्श शुरू"></span></li>
+        <li class="fact" data-reveal><b>ICU</b><span data-en="With neonatal intensive care (NICU)" data-hi="नवजात शिशु गहन चिकित्सा (NICU) के साथ"></span></li>
+        <li class="fact" data-reveal><b data-en="1 call" data-hi="1 कॉल"></b><span data-en="One number for appointments and enquiries" data-hi="अपॉइंटमेंट और जानकारी के लिए एक ही नंबर"></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="marquee" role="region" data-aria-en="Services at a glance" data-aria-hi="सेवाएँ एक नज़र में">
+    <div class="marquee-track">
+      <ul><li><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg><span data-en="Emergency care" data-hi="आपातकालीन सेवा"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><span data-en="ICU &amp; NICU" data-hi="ICU और NICU"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg><span data-en="Laboratory &amp; pathology" data-hi="प्रयोगशाला और पैथोलॉजी"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-scan"/></svg><span data-en="Ultrasound &amp; X-ray" data-hi="अल्ट्रासाउंड और एक्स-रे"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-wave"/></svg><span data-en="ECG, EEG &amp; Echo" data-hi="ECG, EEG और इको"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-physio"/></svg><span data-en="Physiotherapy" data-hi="फिजियोथेरेपी"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-pill"/></svg><span data-en="Pharmacy" data-hi="फार्मेसी"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-rupee"/></svg><span data-en="Consultation from ₹500" data-hi="₹500 से परामर्श"></span></li></ul>
+      <ul aria-hidden="true"><li><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg><span data-en="Emergency care" data-hi="आपातकालीन सेवा"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><span data-en="ICU &amp; NICU" data-hi="ICU और NICU"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg><span data-en="Laboratory &amp; pathology" data-hi="प्रयोगशाला और पैथोलॉजी"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-scan"/></svg><span data-en="Ultrasound &amp; X-ray" data-hi="अल्ट्रासाउंड और एक्स-रे"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-wave"/></svg><span data-en="ECG, EEG &amp; Echo" data-hi="ECG, EEG और इको"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-physio"/></svg><span data-en="Physiotherapy" data-hi="फिजियोथेरेपी"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-pill"/></svg><span data-en="Pharmacy" data-hi="फार्मेसी"></span></li><li><svg class="i" aria-hidden="true"><use href="#i-rupee"/></svg><span data-en="Consultation from ₹500" data-hi="₹500 से परामर्श"></span></li></ul>
+    </div>
+  </div>
+
+  <section id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <span class="kicker" data-en="Care &amp; diagnostics" data-hi="देखभाल और जाँच"></span>
+          <h2 id="services-title" data-en="Find the care you need." data-hi="अपनी ज़रूरत की सेवा पाएँ।"></h2>
+        </div>
+        <p data-en="Explore our hospital and diagnostic services. Call to confirm availability, timings and charges before your visit." data-hi="अस्पताल और जाँच सेवाएँ देखें। आने से पहले उपलब्धता, समय और शुल्क की जानकारी के लिए कॉल करें।"></p>
+      </div>
+      <div class="filters" role="group" data-aria-en="Service filters" data-aria-hi="सेवाओं की श्रेणियाँ">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true" data-en="All services" data-hi="सभी सेवाएँ"></button>
+        <button class="filter" type="button" data-filter="care" aria-pressed="false" data-en="Hospital care" data-hi="अस्पताल सेवाएँ"></button>
+        <button class="filter" type="button" data-filter="diagnostics" aria-pressed="false" data-en="Diagnostics" data-hi="जाँच सेवाएँ"></button>
+        <button class="filter" type="button" data-filter="support" aria-pressed="false" data-en="Support services" data-hi="सहायक सेवाएँ"></button>
+      </div>
+      <p class="sr-only" id="filter-status" role="status" data-tpl-en="Showing {n} services" data-tpl-hi="{n} सेवाएँ दिखाई जा रही हैं"></p>
+
+      <div class="explorer" data-reveal>
+        <div class="svc-tabs" role="tablist" aria-orientation="vertical" data-aria-en="Services" data-aria-hi="सेवाएँ">
+          <button class="svc-tab em" role="tab" id="tab-emergency" aria-controls="svc-emergency" aria-selected="true" data-cat="care"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg></span><span><span class="t" data-en="Emergency care" data-hi="आपातकालीन सेवा"></span><span class="c" data-en="Hospital care" data-hi="अस्पताल सेवाएँ"></span></span><svg class="i chev" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="svc-tab" role="tab" id="tab-icu" aria-controls="svc-icu" aria-selected="false" tabindex="-1" data-cat="care"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span><span><span class="t" data-en="ICU &amp; NICU" data-hi="ICU और NICU"></span><span class="c" data-en="Hospital care" data-hi="अस्पताल सेवाएँ"></span></span><svg class="i chev" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="svc-tab" role="tab" id="tab-lab" aria-controls="svc-lab" aria-selected="false" tabindex="-1" data-cat="diagnostics"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg></span><span><span class="t" data-en="Laboratory &amp; pathology" data-hi="प्रयोगशाला और पैथोलॉजी"></span><span class="c" data-en="Diagnostics" data-hi="जाँच सेवाएँ"></span></span><svg class="i chev" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="svc-tab" role="tab" id="tab-imaging" aria-controls="svc-imaging" aria-selected="false" tabindex="-1" data-cat="diagnostics"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-scan"/></svg></span><span><span class="t" data-en="Ultrasound &amp; X-ray" data-hi="अल्ट्रासाउंड और एक्स-रे"></span><span class="c" data-en="Diagnostics" data-hi="जाँच सेवाएँ"></span></span><svg class="i chev" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="svc-tab" role="tab" id="tab-ecg" aria-controls="svc-ecg" aria-selected="false" tabindex="-1" data-cat="diagnostics"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-wave"/></svg></span><span><span class="t" data-en="ECG, EEG &amp; Echo" data-hi="ECG, EEG और इको"></span><span class="c" data-en="Diagnostics" data-hi="जाँच सेवाएँ"></span></span><svg class="i chev" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="svc-tab" role="tab" id="tab-physio" aria-controls="svc-physio" aria-selected="false" tabindex="-1" data-cat="support"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-physio"/></svg></span><span><span class="t" data-en="Physiotherapy" data-hi="फिजियोथेरेपी"></span><span class="c" data-en="Support services" data-hi="सहायक सेवाएँ"></span></span><svg class="i chev" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="svc-tab" role="tab" id="tab-pharmacy" aria-controls="svc-pharmacy" aria-selected="false" tabindex="-1" data-cat="support"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-pill"/></svg></span><span><span class="t" data-en="Pharmacy" data-hi="फार्मेसी"></span><span class="c" data-en="Support services" data-hi="सहायक सेवाएँ"></span></span><svg class="i chev" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+
+        <div class="svc-panels">
+          <div class="svc em is-active" id="svc-emergency" role="tabpanel" aria-labelledby="tab-emergency" data-cat="care">
+            <div class="svc-art photo"><img src="/assets/hero-640.webp" srcset="/assets/hero-640.webp 640w, /assets/hero-960.webp 960w" sizes="(max-width: 900px) 100vw, 55vw" width="640" height="427" loading="lazy" style="object-position:70% 30%" data-alt-en="Illustrative healthcare image" data-alt-hi="सांकेतिक स्वास्थ्य सेवा चित्र"></div>
+            <div class="svc-body">
+              <span class="tag" data-en="Round-the-clock support" data-hi="चौबीसों घंटे सेवा"></span>
+              <h3 data-en="Emergency care" data-hi="आपातकालीन सेवा"></h3>
+              <p data-en="24×7 emergency care. Contact the hospital directly for assistance." data-hi="24×7 आपातकालीन सेवा। सहायता के लिए सीधे अस्पताल में संपर्क करें।"></p>
+              <div class="ask"><h4 data-en="Good to know" data-hi="ध्यान रखें"></h4><ul>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Available 24×7, as advertised by the hospital" data-hi="अस्पताल द्वारा 24×7 उपलब्ध बताई गई"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Call directly for assistance" data-hi="सहायता के लिए सीधे कॉल करें"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="This website cannot assess symptoms" data-hi="यह वेबसाइट लक्षणों का आकलन नहीं करती"></span></li>
+              </ul></div>
+              <div class="svc-actions"><a class="btn emergency" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call now" data-hi="अभी कॉल करें"></span></a><a class="btn outline-light" href="https://www.google.com/maps/dir//Rajendra+n+n+hospital,+Ratu+Rd,+Judge+Colony,+chowk,+Ranchi,+Jharkhand+834001/@23.3432048,85.3213263,12z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x39f4e1154693f36d:0x4f344779d616c020!2m2!1d85.3159531!2d23.3791183" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span data-en="Get directions" data-hi="रास्ता देखें"></span></a><a class="btn outline-light" href="{{ u('departments/emergency/') }}"><span data-en="Department details" data-hi="विभाग की जानकारी"></span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+          <div class="svc" id="svc-icu" role="tabpanel" aria-labelledby="tab-icu" data-cat="care">
+            <div class="svc-art"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span></div>
+            <div class="svc-body">
+              <span class="tag" data-en="Hospital care" data-hi="अस्पताल सेवाएँ"></span>
+              <h3 data-en="ICU &amp; NICU" data-hi="ICU और NICU"></h3>
+              <p data-en="Intensive care and neonatal intensive care facilities." data-hi="गहन चिकित्सा और नवजात शिशु गहन चिकित्सा सुविधाएँ।"></p>
+              <div class="ask"><h4 data-en="Ask the hospital about" data-hi="अस्पताल से पूछें"></h4><ul>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Bed availability" data-hi="बेड की उपलब्धता"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Visiting arrangements for family" data-hi="परिवार के लिए मिलने की व्यवस्था"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="What to bring for the patient" data-hi="मरीज़ के लिए क्या साथ लाएँ"></span></li>
+              </ul></div>
+              <div class="svc-actions"><a class="btn ghost" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call" data-hi="कॉल करें"></span></a><a class="btn" href="{{ u('book/') }}?dept=critical-care"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book" data-hi="बुक करें"></span></a><a class="btn ghost" href="{{ u('departments/critical-care/') }}"><span data-en="Department details" data-hi="विभाग की जानकारी"></span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+          <div class="svc" id="svc-lab" role="tabpanel" aria-labelledby="tab-lab" data-cat="diagnostics">
+            <div class="svc-art photo"><img src="/assets/lab-640.webp" srcset="/assets/lab-640.webp 640w, /assets/lab.webp 1536w" sizes="(max-width: 900px) 100vw, 55vw" width="640" height="427" loading="lazy" style="object-position:center 30%" data-alt-en="AI illustration of laboratory testing" data-alt-hi="प्रयोगशाला जाँच का AI चित्र"></div>
+            <div class="svc-body">
+              <span class="tag" data-en="Diagnostics" data-hi="जाँच सेवाएँ"></span>
+              <h3 data-en="Laboratory &amp; pathology" data-hi="प्रयोगशाला और पैथोलॉजी"></h3>
+              <p data-en="Enquire about laboratory tests, preparation and report collection." data-hi="जाँच, तैयारी और रिपोर्ट प्राप्त करने की जानकारी लें।"></p>
+              <div class="ask"><h4 data-en="Ask the hospital about" data-hi="अस्पताल से पूछें"></h4><ul>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Which tests are available" data-hi="कौन-सी जाँच उपलब्ध हैं"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Preparation, such as fasting" data-hi="तैयारी, जैसे खाली पेट आना"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="When reports will be ready" data-hi="रिपोर्ट कब मिलेगी"></span></li>
+              </ul></div>
+              <div class="svc-actions"><a class="btn ghost" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call" data-hi="कॉल करें"></span></a><a class="btn" href="{{ u('book/') }}?dept=laboratory"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book" data-hi="बुक करें"></span></a><a class="btn ghost" href="{{ u('departments/laboratory/') }}"><span data-en="Department details" data-hi="विभाग की जानकारी"></span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+          <div class="svc" id="svc-imaging" role="tabpanel" aria-labelledby="tab-imaging" data-cat="diagnostics">
+            <div class="svc-art"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-scan"/></svg></span></div>
+            <div class="svc-body">
+              <span class="tag" data-en="Diagnostics" data-hi="जाँच सेवाएँ"></span>
+              <h3 data-en="Ultrasound &amp; X-ray" data-hi="अल्ट्रासाउंड और एक्स-रे"></h3>
+              <p data-en="Call to confirm imaging availability, timings and preparation." data-hi="इमेजिंग जाँच की उपलब्धता, समय और तैयारी की जानकारी लें।"></p>
+              <div class="ask"><h4 data-en="Ask the hospital about" data-hi="अस्पताल से पूछें"></h4><ul>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Imaging availability and timings" data-hi="इमेजिंग की उपलब्धता और समय"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Preparation before the scan" data-hi="जाँच से पहले की तैयारी"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Charges" data-hi="शुल्क"></span></li>
+              </ul></div>
+              <div class="svc-actions"><a class="btn ghost" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call" data-hi="कॉल करें"></span></a><a class="btn" href="{{ u('book/') }}?dept=radiology"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book" data-hi="बुक करें"></span></a><a class="btn ghost" href="{{ u('departments/radiology/') }}"><span data-en="Department details" data-hi="विभाग की जानकारी"></span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+          <div class="svc" id="svc-ecg" role="tabpanel" aria-labelledby="tab-ecg" data-cat="diagnostics">
+            <div class="svc-art"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-wave"/></svg></span></div>
+            <div class="svc-body">
+              <span class="tag" data-en="Diagnostics" data-hi="जाँच सेवाएँ"></span>
+              <h3 data-en="ECG, EEG &amp; Echo" data-hi="ECG, EEG और इको"></h3>
+              <p data-en="Enquire about ECG, EEG and echocardiography services." data-hi="ECG, EEG और इकोकार्डियोग्राफी सेवाओं की जानकारी लें।"></p>
+              <div class="ask"><h4 data-en="Ask the hospital about" data-hi="अस्पताल से पूछें"></h4><ul>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Which test your doctor has asked for" data-hi="डॉक्टर ने कौन-सी जाँच लिखी है"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Timings and charges" data-hi="समय और शुल्क"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Bring your doctor’s prescription" data-hi="डॉक्टर का पर्चा साथ लाएँ"></span></li>
+              </ul></div>
+              <div class="svc-actions"><a class="btn ghost" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call" data-hi="कॉल करें"></span></a><a class="btn" href="{{ u('book/') }}?dept=cardiology"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book" data-hi="बुक करें"></span></a><a class="btn ghost" href="{{ u('departments/cardiology/') }}"><span data-en="Department details" data-hi="विभाग की जानकारी"></span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+          <div class="svc" id="svc-physio" role="tabpanel" aria-labelledby="tab-physio" data-cat="support">
+            <div class="svc-art"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-physio"/></svg></span></div>
+            <div class="svc-body">
+              <span class="tag" data-en="Support services" data-hi="सहायक सेवाएँ"></span>
+              <h3 data-en="Physiotherapy" data-hi="फिजियोथेरेपी"></h3>
+              <p data-en="Contact the hospital for physiotherapy availability and appointments." data-hi="फिजियोथेरेपी की उपलब्धता और अपॉइंटमेंट के लिए संपर्क करें।"></p>
+              <div class="ask"><h4 data-en="Ask the hospital about" data-hi="अस्पताल से पूछें"></h4><ul>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Session timings" data-hi="सत्र का समय"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Fees per session" data-hi="प्रति सत्र शुल्क"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Bring previous reports" data-hi="पिछली रिपोर्ट साथ लाएँ"></span></li>
+              </ul></div>
+              <div class="svc-actions"><a class="btn ghost" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call" data-hi="कॉल करें"></span></a><a class="btn" href="{{ u('book/') }}?dept=physiotherapy"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book" data-hi="बुक करें"></span></a><a class="btn ghost" href="{{ u('departments/physiotherapy/') }}"><span data-en="Department details" data-hi="विभाग की जानकारी"></span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+          <div class="svc" id="svc-pharmacy" role="tabpanel" aria-labelledby="tab-pharmacy" data-cat="support">
+            <div class="svc-art"><span class="big"><svg class="i" aria-hidden="true"><use href="#i-pill"/></svg></span></div>
+            <div class="svc-body">
+              <span class="tag" data-en="Support services" data-hi="सहायक सेवाएँ"></span>
+              <h3 data-en="Pharmacy" data-hi="फार्मेसी"></h3>
+              <p data-en="Enquire with the hospital about pharmacy services." data-hi="फार्मेसी सेवाओं की जानकारी अस्पताल से लें।"></p>
+              <div class="ask"><h4 data-en="Ask the hospital about" data-hi="अस्पताल से पूछें"></h4><ul>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Medicine availability" data-hi="दवा की उपलब्धता"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Timings" data-hi="समय"></span></li>
+                <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span data-en="Bring your prescription" data-hi="पर्चा साथ लाएँ"></span></li>
+              </ul></div>
+              <div class="svc-actions"><a class="btn ghost" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call" data-hi="कॉल करें"></span></a><a class="btn ghost" href="{{ u('departments/pharmacy/') }}"><span data-en="Department details" data-hi="विभाग की जानकारी"></span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="explorer-note"><a class="link" href="{{ u('departments/') }}" data-en="See all 14 departments" data-hi="सभी 14 विभाग देखें"></a><span class="sep" aria-hidden="true">·</span><svg class="i" aria-hidden="true"><use href="#i-guide"/></svg><span data-en="Not sure which service you need?" data-hi="समझ नहीं आ रहा कि कौन-सी सेवा चाहिए?"></span> <button class="link" type="button" data-open-guide data-en="Help me plan my visit" data-hi="विज़िट की तैयारी में सहायता"></button></p>
+    </div>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <span class="kicker" data-en="Your local hospital" data-hi="आपके क्षेत्र का अस्पताल"></span>
+      <div class="about-grid">
+        <div class="about-copy" data-reveal>
+          <h2 id="about-title" class="statement" data-en="Care in Ranchi. Connection made simple." data-hi="रांची में देखभाल।<br>संपर्क करना आसान।"></h2>
+          <p data-en="Rajendra N.N. Hospital brings hospital care, diagnostics and support services together at Ratu Road Chowk, Ranchi." data-hi="राजेन्द्र एन.एन. अस्पताल, रातू रोड चौक, रांची में अस्पताल, जाँच और सहायक सेवाएँ प्रदान करता है।"></p>
+          <p data-en="Whether you are enquiring about a consultation or a diagnostic test, speak with the hospital to confirm the right service and plan your visit." data-hi="परामर्श या किसी जाँच की जानकारी के लिए अस्पताल से बात करें और अपनी विज़िट की योजना बनाएँ।"></p>
+          <a href="tel:{{ site.phone }}" class="btn"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Talk to us" data-hi="हमसे बात करें"></span></a>
+        </div>
+        <div id="facilities">
+          <h3 class="fac-title" data-en="Hospital facilities" data-hi="अस्पताल की सुविधाएँ"></h3>
+          <ul class="facility-grid" data-reveal>
+            <li class="facility"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span><div><strong>ICU</strong><small data-en="Intensive care" data-hi="गहन चिकित्सा"></small></div></li>
+            <li class="facility"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-baby"/></svg></span><div><strong>NICU</strong><small data-en="Neonatal intensive care" data-hi="नवजात शिशु गहन चिकित्सा"></small></div></li>
+            <li class="facility"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg></span><div><strong data-en="Laboratory" data-hi="प्रयोगशाला"></strong><small data-en="Diagnostic testing" data-hi="जाँच सेवाएँ"></small></div></li>
+            <li class="facility"><span class="ico"><svg class="i" aria-hidden="true"><use href="#i-pill"/></svg></span><div><strong data-en="Pharmacy" data-hi="फार्मेसी"></strong><small data-en="Pharmacy services" data-hi="फार्मेसी सेवाएँ"></small></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="doctors" class="feat-docs" aria-labelledby="doc-title">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <span class="kicker" data-en="Our doctors" data-hi="हमारे डॉक्टर"></span>
+          <h2 id="doc-title" data-en="The right conversation.<br>A clearer way forward." data-hi="सही बातचीत।<br>अगली दिशा स्पष्ट।"></h2>
+        </div>
+        <div>
+          <p data-en="See who is available, their OPD timings and fees, and book a slot. Consultations start at ₹500." data-hi="देखें कौन उपलब्ध है, उनका OPD समय और शुल्क, और समय बुक करें। परामर्श ₹500 से शुरू।"></p>
+          <a class="link" href="{{ u('doctors/') }}" data-en="See all doctors" data-hi="सभी डॉक्टर देखें"></a>
+        </div>
+      </div>
+      <div class="doc-grid-home" data-reveal>
+        {% for slug in ['dr-anil-kumar-sinha','dr-priya-mahato','dr-sneha-verma','dr-manoj-prasad','dr-ritu-singh','dr-farah-naaz'] %}{% for d in doctors if d.slug == slug %}{{ m.doctor_card(d) }}{% endfor %}{% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="pkg-teaser" aria-labelledby="pkg-title">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <span class="kicker" data-en="Health check-ups" data-hi="हेल्थ चेक-अप"></span>
+          <h2 id="pkg-title" data-en="Check in on your health." data-hi="अपनी सेहत की जाँच करवाएँ।"></h2>
+        </div>
+        <div>
+          <p data-en="Packages for every stage of life, with reports and a doctor consultation included." data-hi="जीवन के हर पड़ाव के लिए पैकेज, रिपोर्ट और डॉक्टर परामर्श के साथ।"></p>
+          <a class="link" href="{{ u('health-checkups/') }}" data-en="Compare all packages" data-hi="सभी पैकेज देखें"></a>
+        </div>
+      </div>
+      <div class="pkg-grid" data-reveal>
+        {% for p in packages[:3] %}{% include "partials/package_card.html" %}{% endfor %}
+      </div>
+    </div>
+  </section>
+
+
+  <section id="visit" class="visit-sec" aria-labelledby="visit-title">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <div>
+          <span class="kicker" data-en="Visit &amp; contact" data-hi="पता और संपर्क"></span>
+          <h2 id="visit-title" data-en="Your visit, step by step." data-hi="आपकी विज़िट, कदम दर कदम।"></h2>
+        </div>
+        <p data-en="Four simple steps from first call to arrival at Ratu Road Chowk." data-hi="पहली कॉल से रातू रोड चौक पहुँचने तक, चार आसान कदम।"></p>
+      </div>
+      <ol class="steps" data-reveal style="list-style:none;margin:0 0 40px;padding:0">
+        <li class="step" style="--i:0"><h3 data-en="Call or book online" data-hi="कॉल करें या ऑनलाइन बुक करें"></h3><p><a href="tel:{{ site.phone }}">+91 8757731665</a> <span data-en="or book online. The hospital confirms by phone." data-hi="पर कॉल करें या ऑनलाइन बुक करें। अस्पताल फ़ोन पर पुष्टि करता है।"></span></p></li>
+        <li class="step" style="--i:1"><h3 data-en="Confirm the details" data-hi="जानकारी की पुष्टि करें"></h3><p data-en="Ask which doctor is available, the fee and the appointment timing." data-hi="डॉक्टर की उपलब्धता, शुल्क और अपॉइंटमेंट का समय पूछें।"></p></li>
+        <li class="step" style="--i:2"><h3 data-en="Bring your papers" data-hi="अपने काग़ज़ साथ लाएँ"></h3><p data-en="Previous prescriptions or reports, if relevant." data-hi="ज़रूरत हो तो पिछले पर्चे या रिपोर्ट।"></p></li>
+        <li class="step" style="--i:3"><h3 data-en="Come to Ratu Road Chowk" data-hi="रातू रोड चौक आएँ"></h3><p data-en="Open the Google listing for directions." data-hi="रास्ते के लिए Google लिस्टिंग खोलें।"></p></li>
+      </ol>
+      <div class="location" data-reveal data-map="https://maps.google.com/maps?q={{ site.geo.lat }},{{ site.geo.lng }}&amp;z=16&amp;output=embed">
+        <svg class="roads" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g fill="none" stroke="#2c7d90" stroke-width="1.2" opacity=".55">
+            <path d="M-20 120 L1220 30"/><path d="M-20 300 L1220 200"/><path d="M-20 470 L1220 380"/>
+            <path d="M180 -20 L300 540"/><path d="M520 -20 L600 540"/><path d="M900 -20 L960 540"/>
+            <path d="M-20 400 C300 360 460 250 720 230 S1100 140 1220 110"/>
+          </g>
+          <g fill="none" stroke="#5fc3d6" stroke-width="9" opacity=".35" stroke-linecap="round">
+            <path d="M-20 250 C260 230 520 190 768 156 S1100 60 1220 30"/>
+            <path d="M768 156 L830 540"/>
+          </g>
+          <path class="route" d="M40 520 C 180 470, 300 420, 420 360 S 640 250, 768 160" fill="none" stroke="#9fe3f0" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 12"/>
+        </svg>
+        <div class="marker" aria-hidden="true"><span class="ring"></span><span class="ring r2"></span><span class="dot"></span><img src="/assets/logo-120.webp" width="60" height="60" alt="" loading="lazy"></div>
+        <button class="map-load" type="button"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span data-en="Show interactive map" data-hi="इंटरैक्टिव नक्शा दिखाएँ"></span></button>
+        <div class="addr">
+          <h3 data-en="We’re here in Ranchi." data-hi="हम रांची में हैं।"></h3>
+          <p class="sub" data-en="Open the hospital’s Google listing for location details and directions." data-hi="स्थान की जानकारी और रास्ते के लिए अस्पताल की Google लिस्टिंग खोलें।"></p>
+          <dl>
+            <div><dt><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span class="sr-only" data-en="Location" data-hi="स्थान"></span></dt><dd><small data-en="Location" data-hi="स्थान"></small><b data-en="Ratu Road Chowk, Judge Colony" data-hi="रातू रोड चौक, जज कॉलोनी"></b><span data-en="Ranchi, Jharkhand 834001" data-hi="रांची, झारखंड 834001"></span></dd></div>
+            <div><dt><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span class="sr-only" data-en="Phone" data-hi="फ़ोन"></span></dt><dd><small data-en="Appointments &amp; enquiries" data-hi="अपॉइंटमेंट और जानकारी"></small><a href="tel:{{ site.phone }}"><b>+91 8757731665</b></a></dd></div>
+            <div><dt><svg class="i" aria-hidden="true"><use href="#i-rupee"/></svg><span class="sr-only" data-en="Fee" data-hi="शुल्क"></span></dt><dd><small data-en="Consultation" data-hi="परामर्श"></small><b data-en="Starts at ₹500" data-hi="₹500 से शुरू"></b></dd></div>
+          </dl>
+          <div class="acts">
+            <a class="btn" href="{{ site.directions_url }}" target="_blank" rel="noopener"><span data-en="Get directions" data-hi="रास्ता देखें"></span><svg class="i" aria-hidden="true"><use href="#i-out"/></svg></a>
+            <a class="btn ghost" href="{{ site.listing_url }}" target="_blank" rel="noopener"><span data-en="Google listing" data-hi="Google लिस्टिंग"></span><svg class="i" aria-hidden="true"><use href="#i-out"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq-grid">
+      <div class="faq-intro" data-reveal>
+        <span class="kicker" data-en="Before you visit" data-hi="आने से पहले"></span>
+        <h2 id="faq-title" data-en="A little clarity.<br>An easier visit." data-hi="सही जानकारी।<br>आसान विज़िट।"></h2>
+        <p data-en="Have another question? The hospital can help you with service availability and appointment enquiries." data-hi="कोई और प्रश्न है? सेवाओं की उपलब्धता और अपॉइंटमेंट की जानकारी के लिए अस्पताल से संपर्क करें।"></p>
+        <a class="link" href="https://www.instagram.com/rajendra_n_n_hospital/" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-ig"/></svg><span data-en="Follow hospital updates on Instagram" data-hi="Instagram पर अस्पताल की जानकारी देखें"></span></a>
+      </div>
+      <div id="faqitems" data-reveal>
+        <details><summary><span data-en="How do I enquire about an appointment?" data-hi="अपॉइंटमेंट की जानकारी कैसे लें?"></span><span class="chev"><svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></span></summary><p data-en="Call +91 8757731665 to confirm doctor availability and appointment timings. A website click does not confirm a booking." data-hi="डॉक्टर की उपलब्धता और अपॉइंटमेंट का समय जानने के लिए +91 8757731665 पर कॉल करें। वेबसाइट पर क्लिक करने से बुकिंग की पुष्टि नहीं होती।"></p></details>
+        <details><summary><span data-en="What is the consultation fee?" data-hi="परामर्श शुल्क कितना है?"></span><span class="chev"><svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></span></summary><p data-en="Consultation starts at ₹500. The fee may vary by doctor or service; confirm the applicable fee with the hospital." data-hi="परामर्श शुल्क ₹500 से शुरू है। डॉक्टर या सेवा के अनुसार शुल्क अलग हो सकता है; अस्पताल से पुष्टि करें।"></p></details>
+        <details><summary><span data-en="Where is the hospital located?" data-hi="अस्पताल कहाँ है?"></span><span class="chev"><svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></span></summary><p data-en="The hospital is at Ratu Road Chowk, Ranchi, Jharkhand. Use the Google listing link for directions." data-hi="अस्पताल रातू रोड चौक, रांची, झारखंड में है। रास्ते के लिए Google लिस्टिंग लिंक खोलें।"></p></details>
+        <details><summary><span data-en="How can I confirm diagnostic tests and charges?" data-hi="जाँच और उसके शुल्क की पुष्टि कैसे करें?"></span><span class="chev"><svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></span></summary><p data-en="Call the hospital before your visit to confirm the test, timing, preparation and charges." data-hi="आने से पहले जाँच, समय, तैयारी और शुल्क की पुष्टि के लिए अस्पताल में कॉल करें।"></p></details>
+        <details><summary><span data-en="How do I contact emergency care?" data-hi="आपातकालीन सेवा से कैसे संपर्क करें?"></span><span class="chev"><svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></span></summary><p data-en="24×7 emergency care is advertised by the hospital. Call +91 8757731665 directly for assistance." data-hi="अस्पताल द्वारा 24×7 आपातकालीन सेवा उपलब्ध बताई गई है। सहायता के लिए सीधे +91 8757731665 पर कॉल करें।"></p></details>
+        <details><summary><span data-en="Can I book an appointment online?" data-hi="क्या मैं ऑनलाइन अपॉइंटमेंट बुक कर सकता/सकती हूँ?"></span><span class="chev"><svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></span></summary><p data-en="Yes. Choose a doctor, date and time on the booking page and send the request on WhatsApp. The hospital calls to confirm; your request is not final until then." data-hi="हाँ। बुकिंग पेज पर डॉक्टर, तारीख़ और समय चुनें और WhatsApp पर अनुरोध भेजें। अस्पताल पुष्टि के लिए कॉल करता है; तब तक अनुरोध अंतिम नहीं है।"></p></details>
+        <details><summary><span data-en="Do you accept health insurance or Ayushman Bharat?" data-hi="क्या स्वास्थ्य बीमा या आयुष्मान भारत स्वीकार है?"></span><span class="chev"><svg class="i" aria-hidden="true"><use href="#i-chev"/></svg></span></summary><p data-en="See the insurance list on the Patients &amp; visitors page, and call before admission to confirm your insurer or scheme." data-hi="मरीज़ और आगंतुक पेज पर बीमा सूची देखें, और भर्ती से पहले अपने बीमा या योजना की पुष्टि के लिए कॉल करें।"></p></details>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("Contact & location", "संपर्क और पता", "We’re here in Ranchi.", "हम रांची में हैं।", "Ratu Road Chowk, Judge Colony, Ranchi. Call, message on WhatsApp, or get directions.", "रातू रोड चौक, जज कॉलोनी, रांची। कॉल करें, WhatsApp पर संदेश भेजें, या रास्ता देखें।", [("contact/", "Contact", "संपर्क")]) }}
+
+<section class="pv-sec">
+  <div class="wrap contact-grid">
+    <div class="contact-cards">
+      <a class="c-card" href="tel:{{ site.phone }}">{{ m.ico('phone') }}<span><small data-en="Appointments & enquiries" data-hi="अपॉइंटमेंट और जानकारी"></small><b>{{ site.phone_display }}</b></span></a>
+      <a class="c-card em" href="tel:{{ site.emergency_phone }}">{{ m.ico('cross') }}<span><small data-en="Emergency, 24×7" data-hi="आपातकालीन सेवा, 24×7"></small><b>{{ site.phone_display }}</b></span></a>
+      <a class="c-card" href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener">{{ m.ico('wa') }}<span><small><span data-en="WhatsApp" data-hi="WhatsApp"></span> {% if site.whatsapp_sample %}{{ m.sample() }}{% endif %}</small><b>{{ site.phone_display }}</b></span></a>
+      <div class="c-card">{{ m.ico('pin') }}<span><small data-en="Address" data-hi="पता"></small><b>{{ site.address.line1|l }}</b><span>{{ site.address.line2|l }}</span></span></div>
+      <div class="c-links">
+        <a class="btn" href="{{ site.directions_url }}" target="_blank" rel="noopener">{{ m.ico('pin') }}<span data-en="Get directions" data-hi="रास्ता देखें"></span></a>
+        <a class="btn ghost" href="{{ site.listing_url }}" target="_blank" rel="noopener"><span data-en="Google listing" data-hi="Google लिस्टिंग"></span>{{ m.ico('out') }}</a>
+        <a class="btn ghost" href="{{ site.instagram_url }}" target="_blank" rel="noopener">{{ m.ico('ig') }}<span>Instagram</span></a>
+      </div>
+    </div>
+    <div class="location map-big" data-map="https://maps.google.com/maps?q={{ site.geo.lat }},{{ site.geo.lng }}&amp;z=16&amp;output=embed">
+      <svg class="roads" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="#2c7d90" stroke-width="1.2" opacity=".55"><path d="M-20 120 L1220 30"/><path d="M-20 300 L1220 200"/><path d="M-20 470 L1220 380"/><path d="M180 -20 L300 540"/><path d="M520 -20 L600 540"/><path d="M900 -20 L960 540"/></g>
+        <g fill="none" stroke="#5fc3d6" stroke-width="9" opacity=".35" stroke-linecap="round"><path d="M-20 250 C260 230 520 190 768 156 S1100 60 1220 30"/><path d="M768 156 L830 540"/></g>
+      </svg>
+      <div class="marker" aria-hidden="true"><span class="ring"></span><span class="ring r2"></span><span class="dot"></span><img src="/assets/logo-120.webp" width="60" height="60" alt="" loading="lazy"></div>
+      <button class="map-load" type="button">{{ m.ico('pin') }}<span data-en="Show interactive map" data-hi="इंटरैक्टिव नक्शा दिखाएँ"></span></button>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec alt">
+  <div class="wrap two-col">
+    <div>
+      <span class="kicker" data-en="Timings" data-hi="समय"></span>
+      <h2 class="h2-sm" data-en="Department hours" data-hi="विभागों का समय"></h2>
+      <p data-en="Emergency is open around the clock. Call before you travel for a specific test or doctor." data-hi="आपातकालीन सेवा चौबीसों घंटे खुली है। किसी खास जाँच या डॉक्टर के लिए आने से पहले कॉल करें।"></p>
+    </div>
+    {% include "partials/hours.html" %}
+  </div>
+</section>
+
+<section class="pv-sec" id="enquiry">
+  <div class="wrap two-col">
+    <div>
+      <span class="kicker" data-en="Write to us" data-hi="हमें लिखें"></span>
+      <h2 class="h2-sm" data-en="Send an enquiry" data-hi="जानकारी के लिए संदेश भेजें"></h2>
+      <p data-en="Ask about a doctor, test, price or admission, or share feedback. Your message opens in WhatsApp, ready to send." data-hi="डॉक्टर, जाँच, कीमत या भर्ती के बारे में पूछें, या सुझाव दें। आपका संदेश WhatsApp में खुलेगा, भेजने के लिए तैयार।"></p>
+    </div>
+    <form class="card-box enquiry" id="enquiry-form" novalidate>
+      <div class="field">
+        <label for="eq-name" data-en="Your name" data-hi="आपका नाम"></label>
+        <input id="eq-name" type="text" autocomplete="name" required maxlength="80">
+        <p class="err" data-err-for="eq-name" hidden></p>
+      </div>
+      <div class="field">
+        <label for="eq-topic" data-en="Topic" data-hi="विषय"></label>
+        <select id="eq-topic">
+          <option data-en="Appointment" data-hi="अपॉइंटमेंट"></option>
+          <option data-en="Lab test or scan" data-hi="लैब जाँच या स्कैन"></option>
+          <option data-en="Admission or insurance" data-hi="भर्ती या बीमा"></option>
+          <option data-en="Feedback" data-hi="सुझाव"></option>
+          <option data-en="Something else" data-hi="कुछ और"></option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="eq-msg" data-en="Message" data-hi="संदेश"></label>
+        <textarea id="eq-msg" rows="4" required maxlength="500"></textarea>
+        <p class="err" data-err-for="eq-msg" hidden></p>
+      </div>
+      <button class="btn wa" type="submit">{{ m.ico('wa') }}<span data-en="Open in WhatsApp" data-hi="WhatsApp में खोलें"></span></button>
+      <p class="fine" data-en="Nothing is sent until you press send in WhatsApp." data-hi="जब तक आप WhatsApp में भेजें नहीं दबाते, कुछ नहीं भेजा जाता।"></p>
+    </form>
+  </div>
+</section>
+{% endblock %}

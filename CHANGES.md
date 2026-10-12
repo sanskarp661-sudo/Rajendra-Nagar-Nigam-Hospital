@@ -1,3 +1,52 @@
+# Version 7: full multi-page website
+
+**From one page to 39 pages per language (78 in total, plus a 404 page).** Every page exists in English and Hindi.
+
+- **Find a doctor:** 14 doctors, with search and filters by department, day ("available today") and gender, plus each doctor's next available slot.
+- **Doctor profiles:** qualifications, languages, fee, a weekly OPD table with today highlighted, and a book button.
+- **Departments:** 14 department pages covering conditions, services, timings, what to bring, doctors and related departments.
+- **Booking:** a 5-step flow for a consultation, check-up package or lab tests.
+  - Slots come from each doctor's schedule in Indian Standard Time. Past slots are disabled, and some are shown as already requested.
+  - Patient details are validated (10-digit Indian mobile, age).
+  - It ends with a reference number (RNH-YYMMDD-XXXX), a ready-to-send WhatsApp message, a calendar file (with a 2-hour reminder) and print.
+  - Links from a doctor, package or lab list skip straight to the right step.
+- **My appointments:** requests saved on the device. You can resend them on WhatsApp, add them to a calendar, cancel (which notifies the hospital on WhatsApp) or book again.
+- **Health check-ups:** 6 packages with prices, included tests and preparation.
+- **Lab tests:** 35 tests and scans with search, categories, fasting and report times. A test list with a running total carries into booking.
+- **Other pages:**
+  - Patients & visitors: timings, what to bring, admission and discharge, insurance & TPA, visiting rules, patient rights.
+  - Emergency.
+  - Contact: a Google Map that loads on request, and an enquiry form that opens in WhatsApp.
+  - About.
+- **Site search** (press /): doctors, departments, packages, tests and pages. It understands Hindi and common words such as "sugar" → diabetes tests and "child" → paediatrics.
+
+**Data and content**
+- All content lives in `data/*.json` (bilingual) and `templates/` (Jinja2). `build.py` generates every page and stops if any text is missing a translation.
+- Doctors, timings, prices, packages, insurers and figures are **sample data**. They're marked "Sample" throughout, with a preview notice at the top of every page, and are controlled by `sample_mode` in `data/site.json`.
+- No made-up reviews, accreditations or awards.
+- New schema.org data: a Physician entry on each doctor page and breadcrumbs on all sub-pages.
+
+**Quality**
+- Tested in Chromium:
+  - all 78 pages at widths from 320px to 1440px: no horizontal overflow;
+  - 3,869 internal links: none broken;
+  - axe-core on 13 page types × 2 languages × 2 screen sizes: 0 violations;
+  - the booking, lab basket, package and My appointments flows end to end in both languages.
+- Lighthouse, mobile:
+
+| Page | Speed |
+|---|---|
+| Home | 94 |
+| Doctors | 96 |
+| Lab tests | 96 |
+| Contact | 98 |
+| Hindi home | 86 |
+| Hindi booking | 85 |
+
+  Accessibility, best practices and SEO are 100 on all of them, and layout shift is 0.
+
+---
+
 # Version 6: motion and live elements
 
 **What moves, and why**

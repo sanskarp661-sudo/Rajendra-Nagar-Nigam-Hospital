@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+<div class="page-head em-head">
+  <div class="wrap">
+    <nav class="crumbs" data-aria-en="Breadcrumb" data-aria-hi="ब्रेडक्रंब"><a href="{{ u('') }}" data-en="Home" data-hi="होम"></a><span aria-hidden="true">/</span><a href="{{ u('emergency/') }}" aria-current="page" data-en="Emergency" data-hi="आपातकालीन सेवा"></a></nav>
+    <span class="status"><i class="live" aria-hidden="true"></i><span data-en="Emergency open now, 24×7" data-hi="आपातकालीन सेवा अभी खुली, 24×7"></span></span>
+    <h1 data-en="In an emergency, call now." data-hi="आपातकाल में, अभी कॉल करें।"></h1>
+    <a class="em-number" href="tel:{{ site.emergency_phone }}">{{ m.ico('phone') }}<span>8757731665</span></a>
+    <div class="hero-actions">
+      <a class="btn light" href="{{ site.directions_url }}" target="_blank" rel="noopener">{{ m.ico('pin') }}<span data-en="Directions to the hospital" data-hi="अस्पताल का रास्ता"></span></a>
+      <a class="btn outline-light" href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener">{{ m.ico('wa') }}<span data-en="Share location on WhatsApp" data-hi="WhatsApp पर लोकेशन भेजें"></span></a>
+    </div>
+    <p class="fine on-dark" data-en="For a life-threatening emergency you can also dial 112 (national emergency) or 108 (ambulance)." data-hi="जानलेवा आपात स्थिति में आप 112 (राष्ट्रीय आपातकालीन) या 108 (एम्बुलेंस) भी डायल कर सकते हैं।"></p>
+  </div>
+</div>
+
+<section class="pv-sec">
+  <div class="wrap two-col">
+    <div>
+      <span class="kicker" data-en="When to come straight in" data-hi="कब सीधे आएँ"></span>
+      <h2 class="h2-sm" data-en="Come to emergency for:" data-hi="इन स्थितियों में आपातकालीन विभाग आएँ:"></h2>
+      <ul class="tick-list em">
+        <li>{{ m.ico('cross') }}<span data-en="Chest pain, or difficulty breathing" data-hi="सीने में दर्द, या साँस लेने में कठिनाई"></span></li>
+        <li>{{ m.ico('cross') }}<span data-en="Sudden weakness, numbness, confusion or trouble speaking" data-hi="अचानक कमज़ोरी, सुन्नपन, भ्रम या बोलने में दिक्कत"></span></li>
+        <li>{{ m.ico('cross') }}<span data-en="Serious injury, heavy bleeding or a suspected fracture" data-hi="गंभीर चोट, ज़्यादा खून बहना या हड्डी टूटने का शक"></span></li>
+        <li>{{ m.ico('cross') }}<span data-en="Fainting, a seizure, or a high fever in a young baby" data-hi="बेहोशी, दौरा, या छोटे शिशु को तेज़ बुखार"></span></li>
+        <li>{{ m.ico('cross') }}<span data-en="Poisoning, or a snake or animal bite" data-hi="ज़हर, या साँप या जानवर का काटना"></span></li>
+      </ul>
+    </div>
+    <div class="card-box">
+      <h2 class="h3" data-en="On your way" data-hi="रास्ते में"></h2>
+      <ol class="num-steps sm">
+        <li><span data-en="Call the hospital so the team can prepare." data-hi="अस्पताल को कॉल करें ताकि टीम तैयारी कर सके।"></span></li>
+        <li><span data-en="Bring any ID, current medicines and recent reports." data-hi="कोई पहचान पत्र, चल रही दवाएँ और हाल की रिपोर्ट साथ लाएँ।"></span></li>
+        <li><span data-en="Come to Ratu Road Chowk, Judge Colony. Ask for the emergency entrance." data-hi="रातू रोड चौक, जज कॉलोनी आएँ। आपातकालीन प्रवेश के बारे में पूछें।"></span></li>
+      </ol>
+      <p class="fine" data-en="This website cannot assess symptoms. If you are unsure, call." data-hi="यह वेबसाइट लक्षणों का आकलन नहीं कर सकती। संदेह हो तो कॉल करें।"></p>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec alt">
+  <div class="wrap">
+    <h2 class="h2-sm" data-en="Emergency care here" data-hi="यहाँ आपातकालीन देखभाल"></h2>
+    <div class="dept-grid compact">
+      {% for s in ['emergency','critical-care','nicu','radiology','laboratory','pharmacy'] %}{{ m.dept_card(dept_by_slug[s]) }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

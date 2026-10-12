@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("Patients & visitors", "मरीज़ और आगंतुक", "Everything for your visit.", "आपकी विज़िट के लिए सब कुछ।", "Timings, what to bring, admission and discharge, insurance, and visiting rules, in one place.", "समय, क्या साथ लाएँ, भर्ती और डिस्चार्ज, बीमा, और मिलने के नियम, एक ही जगह।", [("patients-visitors/", "Patients & visitors", "मरीज़ और आगंतुक")]) }}
+
+<nav class="jump" data-aria-en="On this page" data-aria-hi="इस पेज पर">
+  <div class="wrap">
+    <a href="#timings" data-en="Timings" data-hi="समय"></a>
+    <a href="#bring" data-en="What to bring" data-hi="क्या साथ लाएँ"></a>
+    <a href="#admission" data-en="Admission & discharge" data-hi="भर्ती और डिस्चार्ज"></a>
+    <a href="#insurance" data-en="Insurance & TPA" data-hi="बीमा और TPA"></a>
+    <a href="#visitors" data-en="Visitors" data-hi="आगंतुक"></a>
+    <a href="#rights" data-en="Your rights" data-hi="आपके अधिकार"></a>
+  </div>
+</nav>
+
+<section id="timings" class="pv-sec">
+  <div class="wrap two-col">
+    <div>
+      <span class="kicker" data-en="Timings" data-hi="समय"></span>
+      <h2 class="h2-sm" data-en="When we’re open" data-hi="हम कब खुले हैं"></h2>
+      <p data-en="Emergency is always open. Other services keep the hours below; call before you travel for a specific test." data-hi="आपातकालीन सेवा हमेशा खुली है। अन्य सेवाओं का समय नीचे दिया है; किसी खास जाँच के लिए आने से पहले कॉल करें।"></p>
+    </div>
+    {% include "partials/hours.html" %}
+  </div>
+</section>
+
+<section id="bring" class="pv-sec alt">
+  <div class="wrap">
+    <span class="kicker" data-en="Before you come" data-hi="आने से पहले"></span>
+    <h2 class="h2-sm" data-en="What to bring" data-hi="क्या साथ लाएँ"></h2>
+    <div class="icon-grid">
+      <div class="icon-item">{{ m.ico('user') }}<b data-en="ID proof" data-hi="पहचान पत्र"></b><span data-en="Aadhaar, voter ID or any photo ID" data-hi="आधार, वोटर ID या कोई फ़ोटो ID"></span></div>
+      <div class="icon-item">{{ m.ico('list') }}<b data-en="Prescriptions & reports" data-hi="पर्चे और रिपोर्ट"></b><span data-en="Previous prescriptions, test results and scans" data-hi="पिछले पर्चे, जाँच रिपोर्ट और स्कैन"></span></div>
+      <div class="icon-item">{{ m.ico('pill') }}<b data-en="Current medicines" data-hi="चल रही दवाएँ"></b><span data-en="The medicines themselves, or a clear list" data-hi="दवाएँ स्वयं, या उनकी साफ़ सूची"></span></div>
+      <div class="icon-item">{{ m.ico('shield') }}<b data-en="Insurance card" data-hi="बीमा कार्ड"></b><span data-en="Insurance or Ayushman card, if using one" data-hi="बीमा या आयुष्मान कार्ड, अगर उपयोग कर रहे हैं"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="admission" class="pv-sec">
+  <div class="wrap two-col">
+    <div>
+      <span class="kicker" data-en="Staying with us" data-hi="भर्ती होने पर"></span>
+      <h2 class="h2-sm" data-en="Admission & discharge" data-hi="भर्ती और डिस्चार्ज"></h2>
+    </div>
+    <ol class="num-steps">
+      <li><b data-en="Admission desk" data-hi="भर्ती काउंटर"></b><span data-en="Bring the doctor’s admission advice, ID and insurance documents to the front desk." data-hi="डॉक्टर की भर्ती सलाह, पहचान पत्र और बीमा दस्तावेज़ फ़्रंट डेस्क पर लाएँ।"></span></li>
+      <li><b data-en="Deposit and estimate" data-hi="जमा राशि और अनुमान"></b><span data-en="The desk explains the expected cost and any deposit, or starts your insurance pre-authorisation." data-hi="डेस्क अनुमानित ख़र्च और जमा राशि बताता है, या आपके बीमा की पूर्व-स्वीकृति शुरू करता है।"></span></li>
+      <li><b data-en="During your stay" data-hi="भर्ती के दौरान"></b><span data-en="One attendant may stay with the patient. Doctors update the family on daily rounds." data-hi="एक परिचारक मरीज़ के साथ रह सकता है। डॉक्टर रोज़ राउंड पर परिवार को जानकारी देते हैं।"></span></li>
+      <li><b data-en="Discharge" data-hi="डिस्चार्ज"></b><span data-en="You receive a discharge summary, medicines list and follow-up date. Bills are settled at the desk." data-hi="आपको डिस्चार्ज सारांश, दवाओं की सूची और फ़ॉलो-अप की तारीख़ मिलती है। बिल डेस्क पर चुकाया जाता है।"></span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="insurance" class="pv-sec alt">
+  <div class="wrap two-col">
+    <div>
+      <span class="kicker" data-en="Paying for care" data-hi="इलाज का भुगतान"></span>
+      <h2 class="h2-sm"><span data-en="Insurance & TPA" data-hi="बीमा और TPA"></span> {% if site.insurers_sample %}{{ m.sample() }}{% endif %}</h2>
+      <p data-en="Cashless treatment may be available with these insurers and schemes. Always call before admission to confirm your policy is accepted." data-hi="इन बीमा कंपनियों और योजनाओं के साथ कैशलेस इलाज उपलब्ध हो सकता है। भर्ती से पहले हमेशा कॉल करके पुष्टि करें कि आपकी पॉलिसी स्वीकार है।"></p>
+      <p data-en="We accept cash, UPI and cards at the hospital." data-hi="अस्पताल में नकद, UPI और कार्ड स्वीकार हैं।"></p>
+    </div>
+    <ul class="insurer-grid">{% for i in site.insurers %}<li>{{ m.ico('shield') }}{{ i|l }}</li>{% endfor %}</ul>
+  </div>
+</section>
+
+<section id="visitors" class="pv-sec">
+  <div class="wrap two-col">
+    <div>
+      <span class="kicker" data-en="Visitors" data-hi="आगंतुक"></span>
+      <h2 class="h2-sm" data-en="Visiting a patient" data-hi="मरीज़ से मिलने आ रहे हैं"></h2>
+      <p class="big-time">{% for h in site.hours if h.key == 'visiting' %}{{ h.value|l }}{% endfor %} {{ m.sample() }}</p>
+    </div>
+    <ul class="tick-list">
+      <li>{{ m.ico('check') }}<span data-en="Two visitors at a time per patient." data-hi="एक मरीज़ से एक समय में दो आगंतुक।"></span></li>
+      <li>{{ m.ico('check') }}<span data-en="ICU and NICU visits are limited and arranged with the nursing team." data-hi="ICU और NICU में मिलना सीमित है और नर्सिंग टीम के साथ तय किया जाता है।"></span></li>
+      <li>{{ m.ico('check') }}<span data-en="Children under 12 are discouraged in wards to protect patients." data-hi="मरीज़ों की सुरक्षा के लिए 12 साल से छोटे बच्चों को वार्ड में न लाएँ।"></span></li>
+      <li>{{ m.ico('check') }}<span data-en="Please don’t visit if you have fever, cough or a cold." data-hi="बुखार, खाँसी या ज़ुकाम हो तो मिलने न आएँ।"></span></li>
+      <li>{{ m.ico('check') }}<span data-en="Keep the hospital quiet and clean, and wash your hands before and after visiting." data-hi="अस्पताल को शांत और साफ़ रखें, और मिलने से पहले और बाद में हाथ धोएँ।"></span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="rights" class="pv-sec alt">
+  <div class="wrap two-col">
+    <div>
+      <span class="kicker" data-en="Your rights" data-hi="आपके अधिकार"></span>
+      <h2 class="h2-sm" data-en="Patient rights & feedback" data-hi="मरीज़ के अधिकार और सुझाव"></h2>
+      <p data-en="You have the right to information about your condition and treatment, to privacy, to see an itemised bill, and to a second opinion." data-hi="आपको अपनी बीमारी और इलाज की जानकारी, गोपनीयता, विस्तृत बिल देखने, और दूसरी राय लेने का अधिकार है।"></p>
+    </div>
+    <div class="card-box">
+      <h3 data-en="Tell us how we did" data-hi="हमें अपना अनुभव बताएँ"></h3>
+      <p data-en="Compliments, concerns or suggestions help us improve. Send them on WhatsApp or speak to the front desk." data-hi="तारीफ़, शिकायत या सुझाव से हमें बेहतर होने में मदद मिलती है। इन्हें WhatsApp पर भेजें या फ़्रंट डेस्क पर बताएँ।"></p>
+      <a class="btn" href="{{ u('contact/') }}#enquiry">{{ m.ico('wa') }}<span data-en="Send feedback" data-hi="सुझाव भेजें"></span></a>
+    </div>
+  </div>
+</section>
+{% endblock %}

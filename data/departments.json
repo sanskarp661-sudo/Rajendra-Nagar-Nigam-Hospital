@@ -1,0 +1,142 @@
+[
+  {
+    "slug": "emergency", "icon": "cross", "category": "care", "sample": false, "image": "hero",
+    "name": {"en": "Emergency & Trauma", "hi": "आपातकालीन और ट्रॉमा"},
+    "short": {"en": "24×7 emergency care. Contact the hospital directly for assistance.", "hi": "24×7 आपातकालीन सेवा। सहायता के लिए सीधे अस्पताल में संपर्क करें।"},
+    "about": {"en": "The emergency department is open round the clock for accidents, sudden illness and urgent care. Call ahead if you can, so the team knows you are coming.", "hi": "आपातकालीन विभाग दुर्घटना, अचानक बीमारी और तत्काल देखभाल के लिए चौबीसों घंटे खुला है। हो सके तो पहले कॉल करें, ताकि टीम को आपके आने की जानकारी रहे।"},
+    "conditions": [{"en": "Accidents and injuries", "hi": "दुर्घटना और चोट"}, {"en": "Chest pain and breathlessness", "hi": "सीने में दर्द और साँस फूलना"}, {"en": "High fever and severe infections", "hi": "तेज़ बुखार और गंभीर संक्रमण"}, {"en": "Poisoning and bites", "hi": "ज़हर और काटने के मामले"}],
+    "services": [{"en": "24×7 triage and resuscitation", "hi": "24×7 ट्रायेज और पुनर्जीवन"}, {"en": "Minor procedures and dressings", "hi": "छोटी प्रक्रियाएँ और ड्रेसिंग"}, {"en": "Direct admission to ICU", "hi": "ICU में सीधा भर्ती"}],
+    "bring": [{"en": "Any ID card", "hi": "कोई पहचान पत्र"}, {"en": "Current medicines and prescriptions", "hi": "चल रही दवाएँ और पर्चे"}, {"en": "Previous reports, if available", "hi": "पिछली रिपोर्ट, अगर उपलब्ध हों"}],
+    "hours": {"en": "Open 24×7", "hi": "24×7 खुला"}
+  },
+  {
+    "slug": "critical-care", "icon": "heart", "category": "care", "sample": false,
+    "name": {"en": "ICU & Critical Care", "hi": "ICU और क्रिटिकल केयर"},
+    "short": {"en": "Intensive care for critically ill patients, with round-the-clock monitoring.", "hi": "गंभीर रूप से बीमार मरीज़ों के लिए गहन चिकित्सा, चौबीसों घंटे निगरानी के साथ।"},
+    "about": {"en": "The intensive care unit looks after patients who need close monitoring and organ support, after surgery, serious infections or emergencies.", "hi": "गहन चिकित्सा इकाई उन मरीज़ों की देखभाल करती है जिन्हें सर्जरी, गंभीर संक्रमण या आपात स्थिति के बाद लगातार निगरानी और सहायता की ज़रूरत होती है।"},
+    "conditions": [{"en": "Severe infections and sepsis", "hi": "गंभीर संक्रमण और सेप्सिस"}, {"en": "Breathing failure", "hi": "साँस लेने में गंभीर परेशानी"}, {"en": "Care after major surgery", "hi": "बड़ी सर्जरी के बाद देखभाल"}],
+    "services": [{"en": "Ventilator support", "hi": "वेंटिलेटर सहायता"}, {"en": "Continuous cardiac monitoring", "hi": "लगातार हृदय निगरानी"}, {"en": "Daily family updates", "hi": "परिवार को रोज़ जानकारी"}],
+    "bring": [{"en": "Patient's ID and previous reports", "hi": "मरीज़ का पहचान पत्र और पिछली रिपोर्ट"}, {"en": "List of current medicines", "hi": "चल रही दवाओं की सूची"}],
+    "hours": {"en": "Open 24×7 · family visits as advised", "hi": "24×7 खुला · परिवार मिलने का समय सलाह अनुसार"}
+  },
+  {
+    "slug": "nicu", "icon": "baby", "category": "care", "sample": false,
+    "name": {"en": "Neonatology & NICU", "hi": "नवजात शिशु रोग और NICU"},
+    "short": {"en": "Neonatal intensive care for newborns who need extra support.", "hi": "अतिरिक्त देखभाल की ज़रूरत वाले नवजात शिशुओं के लिए गहन चिकित्सा।"},
+    "about": {"en": "The NICU cares for premature babies and newborns who need monitoring, warmth, feeding support or treatment in their first weeks.", "hi": "NICU समय से पहले जन्मे और उन नवजात शिशुओं की देखभाल करता है जिन्हें शुरुआती हफ़्तों में निगरानी, गर्माहट, दूध पिलाने में सहायता या इलाज की ज़रूरत होती है।"},
+    "conditions": [{"en": "Premature birth", "hi": "समय से पहले जन्म"}, {"en": "Newborn jaundice", "hi": "नवजात पीलिया"}, {"en": "Low birth weight", "hi": "जन्म के समय कम वज़न"}, {"en": "Breathing difficulty at birth", "hi": "जन्म के समय साँस लेने में कठिनाई"}],
+    "services": [{"en": "Incubators and warmers", "hi": "इनक्यूबेटर और वार्मर"}, {"en": "Phototherapy", "hi": "फोटोथेरेपी"}, {"en": "Feeding support for mothers", "hi": "माताओं के लिए स्तनपान सहायता"}],
+    "bring": [{"en": "Mother's and baby's discharge papers, if referred", "hi": "रेफ़र होने पर माँ और शिशु के डिस्चार्ज काग़ज़"}, {"en": "Baby clothes and blankets", "hi": "शिशु के कपड़े और कंबल"}],
+    "hours": {"en": "Open 24×7 · parents welcome as advised", "hi": "24×7 खुला · माता-पिता सलाह अनुसार मिल सकते हैं"}
+  },
+  {
+    "slug": "general-medicine", "icon": "steth", "category": "care", "sample": true,
+    "name": {"en": "General Medicine", "hi": "सामान्य चिकित्सा"},
+    "short": {"en": "Diagnosis and treatment of common and long-term illnesses in adults.", "hi": "वयस्कों में सामान्य और लंबी बीमारियों की जाँच और इलाज।"},
+    "about": {"en": "Physicians see adults for fever, infections, diabetes, blood pressure and other everyday and long-term conditions, and refer to specialists when needed.", "hi": "फ़िज़िशियन बुखार, संक्रमण, डायबिटीज़, ब्लड प्रेशर और अन्य रोज़मर्रा व लंबी बीमारियों के लिए वयस्कों को देखते हैं, और ज़रूरत पड़ने पर विशेषज्ञ के पास भेजते हैं।"},
+    "conditions": [{"en": "Fever and infections", "hi": "बुखार और संक्रमण"}, {"en": "Diabetes", "hi": "डायबिटीज़"}, {"en": "High blood pressure", "hi": "हाई ब्लड प्रेशर"}, {"en": "Thyroid problems", "hi": "थायरॉइड की समस्या"}],
+    "services": [{"en": "OPD consultations", "hi": "OPD परामर्श"}, {"en": "Health check-ups", "hi": "हेल्थ चेक-अप"}, {"en": "Admission and inpatient care", "hi": "भर्ती और वार्ड में देखभाल"}],
+    "bring": [{"en": "Previous prescriptions and reports", "hi": "पिछले पर्चे और रिपोर्ट"}, {"en": "Your current medicines", "hi": "आपकी चल रही दवाएँ"}],
+    "hours": {"en": "Mon–Sat, 9:00 AM–2:00 PM and 5:00–8:00 PM", "hi": "सोम–शनि, सुबह 9:00–दोपहर 2:00 और शाम 5:00–8:00"}
+  },
+  {
+    "slug": "general-surgery", "icon": "scalpel", "category": "care", "sample": true,
+    "name": {"en": "General Surgery", "hi": "सामान्य सर्जरी"},
+    "short": {"en": "Planned and emergency surgery, including laparoscopic procedures.", "hi": "नियोजित और आपातकालीन सर्जरी, लेप्रोस्कोपिक प्रक्रियाओं सहित।"},
+    "about": {"en": "Surgeons treat conditions such as hernia, gallstones, appendicitis and wounds, with day-care and inpatient options.", "hi": "सर्जन हर्निया, पित्त की पथरी, अपेंडिसाइटिस और घाव जैसी समस्याओं का इलाज करते हैं, डे-केयर और भर्ती दोनों विकल्पों के साथ।"},
+    "conditions": [{"en": "Hernia", "hi": "हर्निया"}, {"en": "Gallstones", "hi": "पित्त की पथरी"}, {"en": "Appendicitis", "hi": "अपेंडिसाइटिस"}, {"en": "Piles and fissures", "hi": "बवासीर और फ़िशर"}],
+    "services": [{"en": "Laparoscopic surgery", "hi": "लेप्रोस्कोपिक सर्जरी"}, {"en": "Day-care procedures", "hi": "डे-केयर प्रक्रियाएँ"}, {"en": "Wound care", "hi": "घाव की देखभाल"}],
+    "bring": [{"en": "Scan and blood reports", "hi": "स्कैन और खून की रिपोर्ट"}, {"en": "List of current medicines", "hi": "चल रही दवाओं की सूची"}],
+    "hours": {"en": "OPD: Tue, Thu, Sat, 11:00 AM–2:00 PM", "hi": "OPD: मंगल, गुरु, शनि, सुबह 11:00–दोपहर 2:00"}
+  },
+  {
+    "slug": "obstetrics-gynaecology", "icon": "female", "category": "care", "sample": true,
+    "name": {"en": "Obstetrics & Gynaecology", "hi": "प्रसूति एवं स्त्री रोग"},
+    "short": {"en": "Pregnancy care, safe delivery and women's health.", "hi": "गर्भावस्था देखभाल, सुरक्षित प्रसव और महिला स्वास्थ्य।"},
+    "about": {"en": "From antenatal check-ups to delivery and after, the team supports women through pregnancy and treats gynaecological conditions.", "hi": "प्रसव पूर्व जाँच से लेकर प्रसव और उसके बाद तक, टीम गर्भावस्था में महिलाओं की देखभाल करती है और स्त्री रोगों का इलाज करती है।"},
+    "conditions": [{"en": "Pregnancy and delivery", "hi": "गर्भावस्था और प्रसव"}, {"en": "Irregular periods", "hi": "अनियमित माहवारी"}, {"en": "PCOS", "hi": "PCOS"}, {"en": "Menopause care", "hi": "रजोनिवृत्ति देखभाल"}],
+    "services": [{"en": "Antenatal check-ups", "hi": "प्रसव पूर्व जाँच"}, {"en": "Normal and caesarean delivery", "hi": "सामान्य और सिज़ेरियन प्रसव"}, {"en": "Pregnancy ultrasound", "hi": "गर्भावस्था अल्ट्रासाउंड"}],
+    "bring": [{"en": "Antenatal card and previous scans", "hi": "प्रसव पूर्व कार्ड और पिछले स्कैन"}, {"en": "Previous prescriptions", "hi": "पिछले पर्चे"}],
+    "hours": {"en": "Mon, Wed, Fri mornings · Tue, Thu evenings", "hi": "सोम, बुध, शुक्र सुबह · मंगल, गुरु शाम"}
+  },
+  {
+    "slug": "paediatrics", "icon": "child", "category": "care", "sample": true,
+    "name": {"en": "Paediatrics", "hi": "शिशु एवं बाल रोग"},
+    "short": {"en": "Care for babies, children and teenagers, including vaccinations.", "hi": "शिशुओं, बच्चों और किशोरों की देखभाल, टीकाकरण सहित।"},
+    "about": {"en": "Paediatricians treat childhood illnesses, track growth and development, and give routine vaccinations.", "hi": "बाल रोग विशेषज्ञ बचपन की बीमारियों का इलाज करते हैं, विकास पर नज़र रखते हैं और नियमित टीके लगाते हैं।"},
+    "conditions": [{"en": "Fever, cough and cold", "hi": "बुखार, खाँसी और ज़ुकाम"}, {"en": "Diarrhoea and dehydration", "hi": "दस्त और पानी की कमी"}, {"en": "Asthma in children", "hi": "बच्चों में अस्थमा"}],
+    "services": [{"en": "Vaccinations", "hi": "टीकाकरण"}, {"en": "Growth and development checks", "hi": "विकास की जाँच"}, {"en": "Children's ward", "hi": "बच्चों का वार्ड"}],
+    "bring": [{"en": "Child's vaccination card", "hi": "बच्चे का टीकाकरण कार्ड"}, {"en": "Previous prescriptions", "hi": "पिछले पर्चे"}],
+    "hours": {"en": "Mon–Sat, 9:30 AM–12:30 PM", "hi": "सोम–शनि, सुबह 9:30–दोपहर 12:30"}
+  },
+  {
+    "slug": "orthopaedics", "icon": "bone", "category": "care", "sample": true,
+    "name": {"en": "Orthopaedics", "hi": "हड्डी रोग (ऑर्थोपेडिक्स)"},
+    "short": {"en": "Bone, joint and spine care, from fractures to arthritis.", "hi": "हड्डी, जोड़ और रीढ़ की देखभाल, फ्रैक्चर से लेकर गठिया तक।"},
+    "about": {"en": "Orthopaedic surgeons treat fractures, sports injuries, joint pain and back problems, working closely with physiotherapy.", "hi": "हड्डी रोग सर्जन फ्रैक्चर, खेल की चोट, जोड़ों के दर्द और कमर की समस्याओं का इलाज करते हैं, फिजियोथेरेपी के साथ मिलकर।"},
+    "conditions": [{"en": "Fractures and dislocations", "hi": "फ्रैक्चर और हड्डी खिसकना"}, {"en": "Knee and joint pain", "hi": "घुटने और जोड़ों का दर्द"}, {"en": "Back and neck pain", "hi": "कमर और गर्दन का दर्द"}],
+    "services": [{"en": "Plaster and splints", "hi": "प्लास्टर और स्प्लिंट"}, {"en": "Fracture surgery", "hi": "फ्रैक्चर सर्जरी"}, {"en": "Joint injections", "hi": "जोड़ों में इंजेक्शन"}],
+    "bring": [{"en": "X-rays and scan reports", "hi": "एक्स-रे और स्कैन रिपोर्ट"}, {"en": "Previous prescriptions", "hi": "पिछले पर्चे"}],
+    "hours": {"en": "Mon, Wed, Fri, 5:00–8:00 PM", "hi": "सोम, बुध, शुक्र, शाम 5:00–8:00"}
+  },
+  {
+    "slug": "cardiology", "icon": "wave", "category": "diagnostics", "sample": false,
+    "name": {"en": "Cardiology (ECG & Echo)", "hi": "हृदय रोग (ECG और इको)"},
+    "short": {"en": "Heart check-ups with ECG and echocardiography.", "hi": "ECG और इकोकार्डियोग्राफी से हृदय की जाँच।"},
+    "about": {"en": "ECG and echocardiography help assess heart rhythm and function. A cardiologist reviews results and advises on treatment.", "hi": "ECG और इकोकार्डियोग्राफी से हृदय की धड़कन और कार्य की जाँच होती है। हृदय रोग विशेषज्ञ रिपोर्ट देखकर इलाज की सलाह देते हैं।"},
+    "conditions": [{"en": "Chest pain", "hi": "सीने में दर्द"}, {"en": "High blood pressure", "hi": "हाई ब्लड प्रेशर"}, {"en": "Irregular heartbeat", "hi": "अनियमित धड़कन"}],
+    "services": [{"en": "ECG", "hi": "ECG"}, {"en": "Echocardiography", "hi": "इकोकार्डियोग्राफी"}, {"en": "Cardiology consultation", "hi": "हृदय रोग परामर्श"}],
+    "bring": [{"en": "Doctor's prescription for the test", "hi": "जाँच के लिए डॉक्टर का पर्चा"}, {"en": "Previous ECGs or reports", "hi": "पिछले ECG या रिपोर्ट"}],
+    "hours": {"en": "Tests daily · consultations Tue, Thu, Sat evenings", "hi": "जाँच प्रतिदिन · परामर्श मंगल, गुरु, शनि शाम"}
+  },
+  {
+    "slug": "neurology", "icon": "brain", "category": "diagnostics", "sample": false,
+    "name": {"en": "Neurology (EEG)", "hi": "तंत्रिका रोग (EEG)"},
+    "short": {"en": "Brain and nerve care, with EEG testing.", "hi": "मस्तिष्क और तंत्रिका की देखभाल, EEG जाँच के साथ।"},
+    "about": {"en": "EEG records the brain's electrical activity and helps assess seizures and other conditions. A neurologist reviews the results.", "hi": "EEG मस्तिष्क की विद्युत गतिविधि दर्ज करता है और दौरे व अन्य समस्याओं की जाँच में मदद करता है। न्यूरोलॉजिस्ट रिपोर्ट देखते हैं।"},
+    "conditions": [{"en": "Seizures and epilepsy", "hi": "दौरे और मिर्गी"}, {"en": "Headache and migraine", "hi": "सिरदर्द और माइग्रेन"}, {"en": "Stroke follow-up", "hi": "स्ट्रोक के बाद देखभाल"}],
+    "services": [{"en": "EEG", "hi": "EEG"}, {"en": "Neurology consultation", "hi": "न्यूरोलॉजी परामर्श"}],
+    "bring": [{"en": "Previous EEG or scan reports", "hi": "पिछली EEG या स्कैन रिपोर्ट"}, {"en": "List of current medicines", "hi": "चल रही दवाओं की सूची"}],
+    "hours": {"en": "EEG by appointment · consultations Wed, Sat", "hi": "EEG अपॉइंटमेंट से · परामर्श बुध, शनि"}
+  },
+  {
+    "slug": "radiology", "icon": "scan", "category": "diagnostics", "sample": false,
+    "name": {"en": "Radiology (Ultrasound & X-ray)", "hi": "रेडियोलॉजी (अल्ट्रासाउंड और एक्स-रे)"},
+    "short": {"en": "Ultrasound and X-ray imaging, with reports from a radiologist.", "hi": "अल्ट्रासाउंड और एक्स-रे इमेजिंग, रेडियोलॉजिस्ट की रिपोर्ट के साथ।"},
+    "about": {"en": "Imaging helps doctors see inside the body. Some scans need preparation, such as a full bladder or fasting, so call before you come.", "hi": "इमेजिंग से डॉक्टर शरीर के अंदर देख पाते हैं। कुछ जाँच के लिए तैयारी चाहिए, जैसे भरा हुआ मूत्राशय या खाली पेट, इसलिए आने से पहले कॉल करें।"},
+    "conditions": [{"en": "Abdominal pain", "hi": "पेट दर्द"}, {"en": "Pregnancy scans", "hi": "गर्भावस्था स्कैन"}, {"en": "Fractures and chest problems", "hi": "फ्रैक्चर और छाती की समस्या"}],
+    "services": [{"en": "Ultrasound", "hi": "अल्ट्रासाउंड"}, {"en": "Digital X-ray", "hi": "डिजिटल एक्स-रे"}],
+    "bring": [{"en": "Doctor's prescription", "hi": "डॉक्टर का पर्चा"}, {"en": "Previous scans for comparison", "hi": "तुलना के लिए पिछले स्कैन"}],
+    "hours": {"en": "Mon–Sat, 9:00 AM–5:00 PM", "hi": "सोम–शनि, सुबह 9:00–शाम 5:00"}
+  },
+  {
+    "slug": "laboratory", "icon": "flask", "category": "diagnostics", "sample": false, "image": "lab",
+    "name": {"en": "Laboratory & Pathology", "hi": "प्रयोगशाला और पैथोलॉजी"},
+    "short": {"en": "Blood, urine and other tests, with reports you can collect or receive.", "hi": "खून, पेशाब और अन्य जाँच, रिपोर्ट लेने या पाने की सुविधा के साथ।"},
+    "about": {"en": "The laboratory runs routine and specialised tests. Check the lab test list for prices, preparation and report times.", "hi": "प्रयोगशाला सामान्य और विशेष जाँच करती है। कीमत, तैयारी और रिपोर्ट के समय के लिए लैब जाँच सूची देखें।"},
+    "conditions": [{"en": "Routine blood tests", "hi": "सामान्य खून जाँच"}, {"en": "Diabetes and thyroid tests", "hi": "डायबिटीज़ और थायरॉइड जाँच"}, {"en": "Liver and kidney tests", "hi": "लिवर और किडनी जाँच"}],
+    "services": [{"en": "Sample collection", "hi": "सैंपल कलेक्शन"}, {"en": "Pathology reports", "hi": "पैथोलॉजी रिपोर्ट"}, {"en": "Health check-up packages", "hi": "हेल्थ चेक-अप पैकेज"}],
+    "bring": [{"en": "Doctor's prescription", "hi": "डॉक्टर का पर्चा"}, {"en": "Come fasting if the test needs it", "hi": "जाँच के लिए ज़रूरी हो तो खाली पेट आएँ"}],
+    "hours": {"en": "Every day, 7:00 AM–9:00 PM", "hi": "प्रतिदिन, सुबह 7:00–रात 9:00"}
+  },
+  {
+    "slug": "physiotherapy", "icon": "physio", "category": "support", "sample": false,
+    "name": {"en": "Physiotherapy", "hi": "फिजियोथेरेपी"},
+    "short": {"en": "Exercise-based therapy for pain, injuries and recovery after surgery.", "hi": "दर्द, चोट और सर्जरी के बाद रिकवरी के लिए व्यायाम आधारित थेरेपी।"},
+    "about": {"en": "Physiotherapists help you move better and recover strength after injury, surgery or stroke, with a plan tailored to you.", "hi": "फिजियोथेरेपिस्ट चोट, सर्जरी या स्ट्रोक के बाद बेहतर चलने-फिरने और ताक़त वापस पाने में मदद करते हैं, आपके अनुसार बनी योजना के साथ।"},
+    "conditions": [{"en": "Back and neck pain", "hi": "कमर और गर्दन का दर्द"}, {"en": "Knee pain and arthritis", "hi": "घुटने का दर्द और गठिया"}, {"en": "Recovery after fracture or surgery", "hi": "फ्रैक्चर या सर्जरी के बाद रिकवरी"}],
+    "services": [{"en": "Exercise therapy", "hi": "व्यायाम थेरेपी"}, {"en": "Electrotherapy", "hi": "इलेक्ट्रोथेरेपी"}, {"en": "Post-surgery rehabilitation", "hi": "सर्जरी के बाद पुनर्वास"}],
+    "bring": [{"en": "Previous reports and X-rays", "hi": "पिछली रिपोर्ट और एक्स-रे"}, {"en": "Comfortable clothes", "hi": "आरामदायक कपड़े"}],
+    "hours": {"en": "Mon–Sat, 8:00 AM–12:00 PM and 4:00–7:00 PM", "hi": "सोम–शनि, सुबह 8:00–दोपहर 12:00 और शाम 4:00–7:00"}
+  },
+  {
+    "slug": "pharmacy", "icon": "pill", "category": "support", "sample": false,
+    "name": {"en": "Pharmacy", "hi": "फार्मेसी"},
+    "short": {"en": "In-hospital pharmacy for prescribed medicines.", "hi": "डॉक्टर द्वारा लिखी दवाओं के लिए अस्पताल की अपनी फार्मेसी।"},
+    "about": {"en": "The pharmacy supplies medicines prescribed by doctors, for inpatients and outpatients. Bring your prescription.", "hi": "फार्मेसी भर्ती और OPD दोनों मरीज़ों के लिए डॉक्टर द्वारा लिखी दवाएँ देती है। अपना पर्चा साथ लाएँ।"},
+    "conditions": [{"en": "Prescription medicines", "hi": "पर्चे पर दी जाने वाली दवाएँ"}, {"en": "Surgical supplies", "hi": "सर्जिकल सामान"}],
+    "services": [{"en": "Prescription dispensing", "hi": "पर्चे से दवा देना"}, {"en": "Medicine availability enquiries", "hi": "दवा की उपलब्धता की जानकारी"}],
+    "bring": [{"en": "Your prescription", "hi": "आपका पर्चा"}],
+    "hours": {"en": "Open 24×7", "hi": "24×7 खुला"}
+  }
+]

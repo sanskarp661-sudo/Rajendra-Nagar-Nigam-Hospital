@@ -1,0 +1,51 @@
+{
+  "_readme": "Hospital-wide details. Anything marked sample is placeholder content: replace it with information confirmed by the hospital, then set sample_mode to false to hide the 'Sample' labels and banner.",
+  "sample_mode": true,
+
+  "name": {"en": "Rajendra N.N. Hospital", "hi": "राजेन्द्र एन.एन. अस्पताल"},
+  "legal_name": "Rajendra Nagar Nigam Hospital",
+  "phone": "+918757731665",
+  "phone_display": "+91 8757731665",
+  "whatsapp": "918757731665",
+  "whatsapp_sample": true,
+  "emergency_phone": "+918757731665",
+  "address": {
+    "line1": {"en": "Ratu Road Chowk, Judge Colony", "hi": "रातू रोड चौक, जज कॉलोनी"},
+    "line2": {"en": "Ranchi, Jharkhand 834001", "hi": "रांची, झारखंड 834001"}
+  },
+  "geo": {"lat": 23.3791183, "lng": 85.3159531},
+  "directions_url": "https://www.google.com/maps/dir//Rajendra+n+n+hospital,+Ratu+Rd,+Judge+Colony,+chowk,+Ranchi,+Jharkhand+834001/@23.3432048,85.3213263,12z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x39f4e1154693f36d:0x4f344779d616c020!2m2!1d85.3159531!2d23.3791183",
+  "listing_url": "https://share.google/dV6MkkXfxDt6fWgJh",
+  "instagram_url": "https://www.instagram.com/rajendra_n_n_hospital/",
+  "consultation_from": 500,
+
+  "hours_sample": true,
+  "hours": [
+    {"key": "emergency", "label": {"en": "Emergency", "hi": "आपातकालीन सेवा"}, "value": {"en": "Open 24×7", "hi": "24×7 खुला"}, "sample": false},
+    {"key": "opd", "label": {"en": "OPD (consultations)", "hi": "OPD (परामर्श)"}, "value": {"en": "Mon–Sat, 9:00 AM–2:00 PM and 5:00–8:00 PM", "hi": "सोम–शनि, सुबह 9:00–दोपहर 2:00 और शाम 5:00–8:00"}, "sample": true},
+    {"key": "lab", "label": {"en": "Laboratory", "hi": "प्रयोगशाला"}, "value": {"en": "Every day, 7:00 AM–9:00 PM", "hi": "प्रतिदिन, सुबह 7:00–रात 9:00"}, "sample": true},
+    {"key": "radiology", "label": {"en": "Ultrasound & X-ray", "hi": "अल्ट्रासाउंड और एक्स-रे"}, "value": {"en": "Mon–Sat, 9:00 AM–5:00 PM", "hi": "सोम–शनि, सुबह 9:00–शाम 5:00"}, "sample": true},
+    {"key": "pharmacy", "label": {"en": "Pharmacy", "hi": "फार्मेसी"}, "value": {"en": "Open 24×7", "hi": "24×7 खुला"}, "sample": true},
+    {"key": "visiting", "label": {"en": "Visiting hours", "hi": "मिलने का समय"}, "value": {"en": "11:00 AM–1:00 PM and 5:00–7:00 PM", "hi": "सुबह 11:00–दोपहर 1:00 और शाम 5:00–7:00"}, "sample": true}
+  ],
+
+  "stats_sample": true,
+  "stats": [
+    {"value": "50+", "label": {"en": "Beds", "hi": "बेड"}},
+    {"value": "10", "label": {"en": "ICU beds", "hi": "ICU बेड"}},
+    {"value": "6", "label": {"en": "NICU beds", "hi": "NICU बेड"}},
+    {"value": "14", "label": {"en": "Departments", "hi": "विभाग"}}
+  ],
+
+  "insurers_sample": true,
+  "insurers": [
+    {"en": "Ayushman Bharat (PM-JAY)", "hi": "आयुष्मान भारत (PM-JAY)"},
+    {"en": "Medi Assist", "hi": "Medi Assist"},
+    {"en": "MD India", "hi": "MD India"},
+    {"en": "Vidal Health", "hi": "Vidal Health"},
+    {"en": "Star Health", "hi": "Star Health"},
+    {"en": "Health India TPA", "hi": "Health India TPA"},
+    {"en": "Paramount Health", "hi": "Paramount Health"},
+    {"en": "Raksha TPA", "hi": "Raksha TPA"}
+  ]
+}

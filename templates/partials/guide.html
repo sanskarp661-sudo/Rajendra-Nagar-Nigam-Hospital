@@ -1,0 +1,22 @@
+<dialog class="guide-dialog" id="guide" aria-labelledby="guide-title">
+  <div class="gd-in">
+    <div class="gd-top">
+      <div>
+        <span class="kicker" data-en="Plan your visit" data-hi="विज़िट की तैयारी"></span>
+        <h2 id="guide-title" data-en="How can we help?" data-hi="आपको किस सेवा की जानकारी चाहिए?"></h2>
+      </div>
+      <button class="close-dialog" id="close-guide" type="button" data-aria-en="Close visit guide" data-aria-hi="गाइड बंद करें"><svg class="i" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <fieldset class="choices">
+      <legend data-en="Choose a service" data-hi="सेवा चुनें"></legend>
+      <div class="choice"><input type="radio" name="visit" id="v-consult" value="consult" checked data-advice-en="Ask which doctor is available, the consultation fee and the appointment timing. Bring previous prescriptions or reports if relevant." data-advice-hi="डॉक्टर की उपलब्धता, परामर्श शुल्क और समय पूछें। ज़रूरत हो तो पिछले पर्चे या रिपोर्ट साथ लाएँ।"><label for="v-consult"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span data-en="Doctor consultation" data-hi="डॉक्टर से परामर्श"></span></label></div>
+      <div class="choice"><input type="radio" name="visit" id="v-test" value="test" data-advice-en="Confirm the exact test, price, preparation instructions and when you can collect the report." data-advice-hi="जाँच का नाम, शुल्क, तैयारी और रिपोर्ट मिलने के समय की पुष्टि करें।"><label for="v-test"><svg class="i" aria-hidden="true"><use href="#i-flask"/></svg><span data-en="Diagnostic test" data-hi="जाँच सेवाएँ"></span></label></div>
+      <div class="choice"><input type="radio" name="visit" id="v-physio" value="physio" data-advice-en="Ask about physiotherapy availability, session timings and fees." data-advice-hi="फिजियोथेरेपी की उपलब्धता, समय और शुल्क की जानकारी लें।"><label for="v-physio"><svg class="i" aria-hidden="true"><use href="#i-physio"/></svg><span data-en="Physiotherapy" data-hi="फिजियोथेरेपी"></span></label></div>
+      <div class="choice em"><input type="radio" name="visit" id="v-emergency" value="emergency" data-advice-en="Call the hospital directly for emergency assistance. This website guide cannot assess symptoms." data-advice-hi="आपातकालीन सहायता के लिए सीधे अस्पताल में कॉल करें। यह वेबसाइट लक्षणों का आकलन नहीं करती।"><label for="v-emergency"><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg><span data-en="Emergency care" data-hi="आपातकालीन सेवा"></span></label></div>
+    </fieldset>
+    <p id="guide-text" aria-live="polite" data-en="Ask which doctor is available, the consultation fee and the appointment timing. Bring previous prescriptions or reports if relevant." data-hi="डॉक्टर की उपलब्धता, परामर्श शुल्क और समय पूछें। ज़रूरत हो तो पिछले पर्चे या रिपोर्ट साथ लाएँ।"></p>
+    <a class="btn" id="guide-call" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call 8757731665" data-hi="8757731665 पर कॉल करें"></span></a>
+    <a class="btn ghost" href="{{ u('book/') }}"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book online instead" data-hi="ऑनलाइन बुक करें"></span></a>
+    <p class="gd-note" data-en="This guide does not book an appointment or send personal information." data-hi="यह गाइड अपॉइंटमेंट बुक नहीं करता और व्यक्तिगत जानकारी नहीं भेजता।"></p>
+  </div>
+</dialog>

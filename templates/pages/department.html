@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{% set team = docs_in(d.slug) %}
+<div class="page-head dept-head{% if d.slug == 'emergency' %} em{% endif %}">
+  <div class="wrap">
+    <nav class="crumbs" data-aria-en="Breadcrumb" data-aria-hi="ब्रेडक्रंब">
+      <a href="{{ u('') }}" data-en="Home" data-hi="होम"></a><span aria-hidden="true">/</span><a href="{{ u('departments/') }}" data-en="Departments" data-hi="विभाग"></a><span aria-hidden="true">/</span><a href="{{ u('departments/' ~ d.slug ~ '/') }}" aria-current="page">{{ d.name|l }}</a>
+    </nav>
+    <div class="dept-hero">
+      <span class="ico xl">{{ m.ico(d.icon) }}</span>
+      <div>
+        <span class="kicker on-dark">{% if d.category == 'care' %}<span data-en="Hospital care" data-hi="अस्पताल सेवाएँ"></span>{% elif d.category == 'diagnostics' %}<span data-en="Diagnostics" data-hi="जाँच सेवाएँ"></span>{% else %}<span data-en="Support services" data-hi="सहायक सेवाएँ"></span>{% endif %}</span>
+        <h1>{{ d.name|l }}{% if d.sample %} {{ m.sample() }}{% endif %}</h1>
+        <p class="lede">{{ d.short|l }}</p>
+        <div class="hero-actions">
+          {% if d.slug == 'emergency' %}
+          <a class="btn emergency" href="tel:{{ site.emergency_phone }}">{{ m.ico('phone') }}<span data-en="Call emergency" data-hi="आपातकालीन कॉल करें"></span></a>
+          <a class="btn outline-light" href="{{ site.directions_url }}" target="_blank" rel="noopener">{{ m.ico('pin') }}<span data-en="Get directions" data-hi="रास्ता देखें"></span></a>
+          {% elif d.slug == 'laboratory' %}
+          <a class="btn light" href="{{ u('lab-tests/') }}">{{ m.ico('flask') }}<span data-en="Lab tests & prices" data-hi="लैब जाँच और कीमतें"></span></a>
+          <a class="btn outline-light" href="{{ u('book/') }}?type=lab">{{ m.ico('calendar') }}<span data-en="Book a lab visit" data-hi="लैब विज़िट बुक करें"></span></a>
+          {% elif d.slug == 'pharmacy' %}
+          <a class="btn light" href="tel:{{ site.phone }}">{{ m.ico('phone') }}<span data-en="Ask about a medicine" data-hi="दवा के बारे में पूछें"></span></a>
+          {% else %}
+          <a class="btn light" href="{{ u('book/') }}?dept={{ d.slug }}">{{ m.ico('calendar') }}<span data-en="Book an appointment" data-hi="अपॉइंटमेंट बुक करें"></span></a>
+          <a class="btn outline-light" href="tel:{{ site.phone }}">{{ m.ico('phone') }}<span data-en="Call the hospital" data-hi="अस्पताल में कॉल करें"></span></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="dept-body">
+  <div class="wrap profile-grid">
+    <div class="profile-main">
+      {% if d.get('image') %}
+      <figure class="dept-figure">
+        {% if d.get('image') == 'lab' %}<img src="/assets/lab-960.webp" srcset="/assets/lab-640.webp 640w, /assets/lab-960.webp 960w, /assets/lab-1280.webp 1280w" sizes="(max-width: 900px) 100vw, 60vw" width="960" height="640" loading="lazy" data-alt-en="AI illustration of laboratory testing" data-alt-hi="प्रयोगशाला जाँच का AI चित्र">
+        {% else %}<img src="/assets/hero-960.webp" srcset="/assets/hero-640.webp 640w, /assets/hero-960.webp 960w, /assets/hero-1280.webp 1280w" sizes="(max-width: 900px) 100vw, 60vw" width="960" height="640" loading="lazy" data-alt-en="AI illustration of a clinician speaking with a patient" data-alt-hi="डॉक्टर और मरीज की बातचीत का AI चित्र">{% endif %}
+        <figcaption data-en="AI-created illustrative image" data-hi="AI से बनाया गया सांकेतिक चित्र"></figcaption>
+      </figure>
+      {% endif %}
+      <h2 class="h3" data-en="About this department" data-hi="इस विभाग के बारे में"></h2>
+      <p class="big-p">{{ d.about|l }}</p>
+      <div class="two-col">
+        <div>
+          <h2 class="h3" data-en="Conditions we see" data-hi="इन समस्याओं का इलाज"></h2>
+          <ul class="tick-list">{% for c in d.conditions %}<li>{{ m.ico('check') }}{{ c|l }}</li>{% endfor %}</ul>
+        </div>
+        <div>
+          <h2 class="h3" data-en="Services" data-hi="सेवाएँ"></h2>
+          <ul class="tick-list">{% for c in d.services %}<li>{{ m.ico('check') }}{{ c|l }}</li>{% endfor %}</ul>
+        </div>
+      </div>
+      {% if d.slug == 'radiology' or d.slug == 'cardiology' or d.slug == 'neurology' or d.slug == 'laboratory' %}
+      <p class="note-box">{{ m.ico('info') }}<span><span data-en="See prices and preparation for each test on the" data-hi="हर जाँच की कीमत और तैयारी देखें:"></span> <a class="link" href="{{ u('lab-tests/') }}" data-en="lab tests page" data-hi="लैब जाँच पेज"></a>.</span></p>
+      {% endif %}
+    </div>
+    <div class="profile-side">
+      <div class="card-box">
+        <h2 class="h3" data-en="Timings" data-hi="समय"></h2>
+        <p class="big-time">{{ d.hours|l }} {% if d.slug != 'emergency' %}{{ m.sample() }}{% endif %}</p>
+        <h2 class="h3" data-en="What to bring" data-hi="क्या साथ लाएँ"></h2>
+        <ul class="tick-list sm">{% for b in d.bring %}<li>{{ m.ico('check') }}{{ b|l }}</li>{% endfor %}</ul>
+        <a class="btn ghost block" href="tel:{{ site.phone }}">{{ m.ico('phone') }}{{ site.phone_display }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if team %}
+<section class="related">
+  <div class="wrap">
+    <h2 class="h2-sm" data-en="Doctors in this department" data-hi="इस विभाग के डॉक्टर"></h2>
+    <div class="doc-grid">{% for doc in team %}{{ m.doctor_card(doc) }}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+<section class="related alt">
+  <div class="wrap">
+    <h2 class="h2-sm" data-en="Other departments" data-hi="अन्य विभाग"></h2>
+    <div class="dept-grid compact">{% for o in depts if o.slug != d.slug and o.category == d.category %}{{ m.dept_card(o) }}{% endfor %}</div>
+  </div>
+</section>
+{% endblock %}

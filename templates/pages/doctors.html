@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("Find a doctor", "डॉक्टर खोजें", "Our doctors", "हमारे डॉक्टर", "Search by name, department or the condition you need help with. See OPD days, timings and fees, and book a slot.", "नाम, विभाग या बीमारी से खोजें। OPD के दिन, समय और शुल्क देखें, और समय बुक करें।", [("doctors/", "Doctors", "डॉक्टर")]) }}
+
+<section class="list-sec" aria-labelledby="doc-list-title">
+  <div class="wrap">
+    <h2 class="sr-only" id="doc-list-title" data-en="Doctor directory" data-hi="डॉक्टर सूची"></h2>
+    <form class="finder" id="doc-finder" role="search" onsubmit="return false">
+      <div class="field grow">
+        <label for="doc-q" data-en="Search" data-hi="खोजें"></label>
+        <div class="input-ico">{{ m.ico('search') }}<input id="doc-q" type="search" autocomplete="off" data-ph-en="Doctor name, department or condition" data-ph-hi="डॉक्टर का नाम, विभाग या बीमारी"></div>
+      </div>
+      <div class="field">
+        <label for="doc-dept" data-en="Department" data-hi="विभाग"></label>
+        <select id="doc-dept">
+          <option value="" data-en="All departments" data-hi="सभी विभाग"></option>
+          {% for d in depts if docs_in(d.slug) %}<option value="{{ d.slug }}">{{ d.name|l }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="doc-day" data-en="Available on" data-hi="उपलब्ध दिन"></label>
+        <select id="doc-day">
+          <option value="" data-en="Any day" data-hi="कोई भी दिन"></option>
+          <option value="today" data-en="Today" data-hi="आज"></option>
+          {% for i in [1,2,3,4,5,6,0] %}<option value="{{ i }}">{{ day_names[i] }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="doc-gender" data-en="Doctor" data-hi="डॉक्टर"></label>
+        <select id="doc-gender">
+          <option value="" data-en="Any" data-hi="कोई भी"></option>
+          <option value="f" data-en="Female doctor" data-hi="महिला डॉक्टर"></option>
+          <option value="m" data-en="Male doctor" data-hi="पुरुष डॉक्टर"></option>
+        </select>
+      </div>
+    </form>
+    <p class="result-count" id="doc-count" role="status">{{ doctors|length }} <span data-en="doctors" data-hi="डॉक्टर"></span></p>
+    <div class="doc-grid" id="doc-grid">
+      {% for d in doctors %}{{ m.doctor_card(d) }}{% endfor %}
+    </div>
+    <div class="empty" id="doc-empty" hidden>
+      {{ m.ico('search') }}
+      <p data-en="No doctor matches these filters. Clear a filter, or call the hospital and we’ll help you find the right doctor." data-hi="इन फ़िल्टर से कोई डॉक्टर नहीं मिला। कोई फ़िल्टर हटाएँ, या अस्पताल में कॉल करें, हम सही डॉक्टर ढूँढने में मदद करेंगे।"></p>
+      <button class="btn ghost" type="button" id="doc-reset" data-en="Clear filters" data-hi="फ़िल्टर हटाएँ"></button>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("About us", "हमारे बारे में", "Care in Ranchi.<br>Connection made simple.", "रांची में देखभाल।<br>संपर्क करना आसान।", "Rajendra N.N. Hospital brings hospital care, diagnostics and support services together at Ratu Road Chowk, Ranchi.", "राजेन्द्र एन.एन. अस्पताल, रातू रोड चौक, रांची में अस्पताल, जाँच और सहायक सेवाएँ एक साथ प्रदान करता है।", [("about/", "About us", "हमारे बारे में")]) }}
+
+<section class="pv-sec">
+  <div class="wrap two-col">
+    <div>
+      <p class="statement" data-en="One place for emergency care, intensive care, consultations and tests, close to home." data-hi="आपातकालीन सेवा, गहन चिकित्सा, परामर्श और जाँच के लिए एक जगह, घर के पास।"></p>
+    </div>
+    <div>
+      <p data-en="Whether you are enquiring about a consultation or a diagnostic test, the hospital helps you find the right service and plan your visit." data-hi="परामर्श या किसी जाँच के बारे में जानकारी लेनी हो, अस्पताल सही सेवा ढूँढने और विज़िट की योजना बनाने में मदद करता है।"></p>
+      <p data-en="Our 24×7 emergency department, ICU and NICU sit alongside the laboratory, ultrasound and X-ray, ECG, EEG and echo, physiotherapy and an in-house pharmacy." data-hi="हमारा 24×7 आपातकालीन विभाग, ICU और NICU, प्रयोगशाला, अल्ट्रासाउंड और एक्स-रे, ECG, EEG और इको, फिजियोथेरेपी और अस्पताल की अपनी फार्मेसी के साथ हैं।"></p>
+    </div>
+  </div>
+</section>
+
+<section class="facts-sec">
+  <div class="wrap">
+    <ul class="fact-grid">
+      {% for s in site.stats %}<li class="fact" data-reveal><b>{{ s.value }}</b><span>{{ s.label|l }} {% if loop.first and site.stats_sample %}{{ m.sample() }}{% endif %}</span></li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="pv-sec alt">
+  <div class="wrap">
+    <span class="kicker" data-en="What guides us" data-hi="हमारे मूल्य"></span>
+    <h2 class="h2-sm" data-en="How we care" data-hi="हम कैसे देखभाल करते हैं"></h2>
+    <div class="icon-grid">
+      <div class="icon-item">{{ m.ico('heart') }}<b data-en="Patients first" data-hi="मरीज़ सबसे पहले"></b><span data-en="Clear explanations, respect and privacy at every step." data-hi="हर कदम पर साफ़ जानकारी, सम्मान और गोपनीयता।"></span></div>
+      <div class="icon-item">{{ m.ico('rupee') }}<b data-en="Fair, upfront pricing" data-hi="उचित, पहले से बताई कीमत"></b><span data-en="Consultations from ₹500; ask for an estimate any time." data-hi="परामर्श ₹500 से; कभी भी अनुमान पूछें।"></span></div>
+      <div class="icon-item">{{ m.ico('lang') }}<b data-en="Your language" data-hi="आपकी भाषा"></b><span data-en="Information in Hindi and English, and doctors who speak local languages." data-hi="हिंदी और अंग्रेज़ी में जानकारी, और स्थानीय भाषाएँ बोलने वाले डॉक्टर।"></span></div>
+      <div class="icon-item">{{ m.ico('clock') }}<b data-en="Always open for emergencies" data-hi="आपात स्थिति के लिए हमेशा खुला"></b><span data-en="24×7 emergency care at Ratu Road Chowk." data-hi="रातू रोड चौक पर 24×7 आपातकालीन सेवा।"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec">
+  <div class="wrap two-col">
+    <div class="soon">
+      <span class="ico" aria-hidden="true">{{ m.ico('photo') }}</span>
+      <span class="tag" data-en="Coming soon" data-hi="जल्द उपलब्ध"></span>
+      <h3 data-en="A look inside, soon" data-hi="अस्पताल की तस्वीरें जल्द उपलब्ध होंगी"></h3>
+      <p data-en="Real photographs of the hospital and its facilities will be added here. Current healthcare images are AI illustrations." data-hi="यहाँ अस्पताल और सुविधाओं की वास्तविक तस्वीरें जोड़ी जाएँगी। अभी दिखाए गए स्वास्थ्य सेवा चित्र AI से बनाए गए हैं।"></p>
+    </div>
+    <div class="card-box">
+      <h2 class="h3" data-en="Visit or get in touch" data-hi="आएँ या संपर्क करें"></h2>
+      <p>{{ site.address.line1|l }}, {{ site.address.line2|l }}</p>
+      <p><a class="link" href="tel:{{ site.phone }}">{{ site.phone_display }}</a></p>
+      <div class="acts"><a class="btn" href="{{ u('contact/') }}" data-en="Contact & location" data-hi="संपर्क और पता"></a><a class="btn ghost" href="{{ site.instagram_url }}" target="_blank" rel="noopener">{{ m.ico('ig') }}<span>Instagram</span></a></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

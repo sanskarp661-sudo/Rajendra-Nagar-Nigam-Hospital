@@ -1,0 +1,61 @@
+{% macro sample(cls='') %}{% if site.sample_mode %}<span class="sample-badge {{ cls }}" data-en="Sample" data-hi="नमूना"></span>{% endif %}{% endmacro %}
+
+{% macro ico(name, cls='') %}<svg class="i {{ cls }}" aria-hidden="true"><use href="#i-{{ name }}"/></svg>{% endmacro %}
+
+{% macro avatar(doc, size='') %}<span class="avatar h{{ hue(doc.slug) }} {{ size }}" aria-hidden="true">{{ initials(doc.name.en) }}</span>{% endmacro %}
+
+{% macro page_head(kicker_en, kicker_hi, title_en, title_hi, lede_en='', lede_hi='', crumbs=[]) %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="crumbs" data-aria-en="Breadcrumb" data-aria-hi="ब्रेडक्रंब">
+      <a href="{{ u('') }}" data-en="Home" data-hi="होम"></a>
+      {% for path, en, hi in crumbs %}<span aria-hidden="true">/</span><a href="{{ u(path) }}" data-en="{{ en }}" data-hi="{{ hi }}"></a>{% endfor %}
+    </nav>
+    <span class="kicker on-dark" data-en="{{ kicker_en }}" data-hi="{{ kicker_hi }}"></span>
+    <h1 data-en="{{ title_en }}" data-hi="{{ title_hi }}"></h1>
+    {% if lede_en %}<p class="lede" data-en="{{ lede_en }}" data-hi="{{ lede_hi }}"></p>{% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro doctor_card(doc) %}
+{% set dept = dept_by_slug[doc.dept] %}
+<article class="doc-card" data-dept="{{ doc.dept }}" data-gender="{{ doc.gender }}" data-days="{% for s in doc.schedule %}{{ s.days|join(',') }}{% if not loop.last %},{% endif %}{% endfor %}" data-search="{{ doc.name.en|lower }} {{ doc.name.hi }} {{ dept.name.en|lower }} {{ dept.name.hi }} {% for i in doc.interests %}{{ i.en|lower }} {{ i.hi }} {% endfor %}{{ doc.qual|lower }}">
+  <a class="doc-link" href="{{ u('doctors/' ~ doc.slug ~ '/') }}">
+    {{ avatar(doc) }}
+    <span class="doc-info">
+      <strong>{{ doc.name|l }}</strong>
+      <span class="doc-dept">{{ dept.name|l }}</span>
+      <span class="doc-qual">{{ doc.qual }}</span>
+    </span>
+  </a>
+  <ul class="doc-meta">
+    {% if doc.bookable %}
+    <li>{{ ico('clock') }}<span>{{ schedule_lines(doc)|join('; ') }}</span></li>
+    <li>{{ ico('rupee') }}<span>{{ rupee(doc.fee) }} <span data-en="consultation" data-hi="परामर्श"></span></span></li>
+    {% else %}
+    <li>{{ ico('cross') }}<span data-en="Emergency team, available 24×7" data-hi="आपातकालीन टीम, 24×7 उपलब्ध"></span></li>
+    {% endif %}
+  </ul>
+  <div class="doc-actions">
+    {% if doc.bookable %}
+    <a class="btn sm" href="{{ u('book/') }}?doctor={{ doc.slug }}">{{ ico('calendar') }}<span data-en="Book" data-hi="बुक करें"></span></a>
+    {% else %}
+    <a class="btn sm emergency" href="tel:{{ site.emergency_phone }}">{{ ico('phone') }}<span data-en="Call emergency" data-hi="आपातकालीन कॉल"></span></a>
+    {% endif %}
+    <a class="btn sm ghost" href="{{ u('doctors/' ~ doc.slug ~ '/') }}" data-en="View profile" data-hi="प्रोफ़ाइल देखें"></a>
+    <span class="avail" data-avail></span>
+  </div>
+  {{ sample('corner') }}
+</article>
+{% endmacro %}
+
+{% macro dept_card(d) %}
+<a class="dept-card{% if d.category == 'care' and d.slug == 'emergency' %} em{% endif %}" href="{{ u('departments/' ~ d.slug ~ '/') }}" data-cat="{{ d.category }}">
+  <span class="ico">{{ ico(d.icon) }}</span>
+  <strong>{{ d.name|l }}</strong>
+  <span>{{ d.short|l }}</span>
+  <span class="go">{{ ico('arrow') }}</span>
+  {% if d.sample %}{{ sample('corner') }}{% endif %}
+</a>
+{% endmacro %}

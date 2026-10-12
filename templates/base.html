@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="{{ lang }}" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#053f4f">
+<title>{{ title }}</title>
+<meta name="description" content="{{ desc }}">
+<link rel="canonical" href="{{ canonical }}">
+<link rel="alternate" hreflang="en" href="{{ href_en }}">
+<link rel="alternate" hreflang="hi" href="{{ href_hi }}">
+<link rel="alternate" hreflang="x-default" href="{{ href_en }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.name|l }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ desc }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:locale" content="{{ 'hi_IN' if lang == 'hi' else 'en_IN' }}">
+<meta property="og:image" content="{{ site_url }}/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/assets/logo-160.png">
+<link rel="apple-touch-icon" href="/assets/logo-160.png">
+<link rel="preload" href="/assets/fonts/mukta-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/tiro-devanagari-hindi-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/mukta-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/mukta-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+{% if lang == 'hi' %}<link rel="preload" href="/assets/fonts/mukta-devanagari-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/tiro-devanagari-hindi-devanagari-400-normal.woff2" as="font" type="font/woff2" crossorigin>{% endif %}
+{% block preload %}{% endblock %}
+{% if lang == 'en' and page == 'home' %}<script>try{if(localStorage.getItem('hospital-language')==='hi')location.replace('/hi/'+location.hash)}catch(e){}</script>{% endif %}
+<script>document.documentElement.className=document.documentElement.className.replace('no-js','js')</script>
+<link rel="stylesheet" href="/assets/css/site.css?v={{ version }}">
+{% if jsonld %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endif %}
+<script>window.RNH={{ js_config|safe }};</script>
+</head>
+<body class="page-{{ page }}">
+{% include "partials/icons.html" %}
+
+<a class="skip" href="#main" data-en="Skip to main content" data-hi="सीधे मुख्य सामग्री पर जाएँ"></a>
+
+<div class="topbar" role="region" data-aria-en="Emergency contact" data-aria-hi="आपातकालीन संपर्क"><div class="wrap">
+  <a href="tel:{{ site.emergency_phone }}"><i class="live" aria-hidden="true"></i><span data-en="Emergency open 24×7 · Call 8757731665" data-hi="आपातकालीन सेवा 24×7 खुली · 8757731665 पर कॉल करें"></span></a>
+  <span class="topbar-links">
+    <a href="{{ u('emergency/') }}" data-en="Emergency information" data-hi="आपातकालीन जानकारी"></a>
+    <a href="{{ u('my-appointments/') }}" data-en="My appointments" data-hi="मेरे अपॉइंटमेंट"></a>
+  </span>
+</div></div>
+{% if site.sample_mode %}
+<div class="sample-bar" role="region" data-aria-en="Preview notice" data-aria-hi="प्रीव्यू सूचना"><div class="wrap"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span data-en="Preview: doctor names, timings, prices and insurer details marked “Sample” are placeholders until confirmed by the hospital." data-hi="प्रीव्यू: “नमूना” चिह्नित डॉक्टरों के नाम, समय, कीमतें और बीमा जानकारी अस्पताल की पुष्टि तक अस्थायी हैं।"></span></div></div>
+{% endif %}
+
+<header>
+  <span class="progress" aria-hidden="true"></span>
+  <div class="wrap nav">
+    <a class="brand" href="{{ u('') }}">
+      <img src="/assets/logo-104.webp" width="54" height="54" data-alt-en="Rajendra Nagar Nigam Hospital logo" data-alt-hi="राजेन्द्र नगर निगम अस्पताल का लोगो">
+      <span><strong data-en="Rajendra N.N. Hospital" data-hi="राजेन्द्र एन.एन. अस्पताल"></strong><small data-en="Ratu Road Chowk, Ranchi" data-hi="रातू रोड चौक, रांची"></small></span>
+    </a>
+    <nav id="nav" data-aria-en="Main navigation" data-aria-hi="मुख्य नेविगेशन">
+      {% for key, path, en, hi in nav %}
+      <a href="{{ u(path) }}"{% if section == key %} aria-current="page"{% endif %} data-en="{{ en }}" data-hi="{{ hi }}"></a>
+      {% endfor %}
+      <a class="nav-book" href="{{ u('book/') }}" data-en="Book appointment" data-hi="अपॉइंटमेंट बुक करें"></a>
+    </nav>
+    <button class="icon-btn" id="search-open" type="button" data-aria-en="Search doctors, departments and tests" data-aria-hi="डॉक्टर, विभाग और जाँच खोजें"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><kbd aria-hidden="true">/</kbd></button>
+    <a class="lang" id="language" href="{{ alt_href }}" hreflang="{{ alt_lang }}"><span class="{{ 'on' if lang == 'en' }}" aria-hidden="true">EN</span><span class="{{ 'on' if lang == 'hi' }}" lang="hi" aria-hidden="true">हिंदी</span><span class="sr-only" data-en="EN हिंदी – View this page in Hindi" data-hi="EN हिंदी – View this page in English"></span></a>
+    <a class="btn call" href="{{ u('book/') }}"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book appointment" data-hi="अपॉइंटमेंट बुक करें"></span></a>
+    <button class="menu-btn" id="menu" type="button" aria-controls="nav" aria-expanded="false" data-aria-en="Menu" data-aria-hi="मेन्यू"><svg class="i" aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="call-big" data-reveal>
+      <div>
+        <h2 data-en="Let’s plan your next step." data-hi="अगला कदम साथ तय करें।"></h2>
+        <p data-en="Call to confirm doctor availability, consultation fees and appointment timings, or book online and we’ll call you back." data-hi="डॉक्टर की उपलब्धता, परामर्श शुल्क और अपॉइंटमेंट का समय जानने के लिए कॉल करें, या ऑनलाइन बुक करें और हम आपको कॉल करेंगे।"></p>
+      </div>
+      <div>
+        <a class="number" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>8757731665</a>
+        <div class="acts">
+          <a class="btn light" href="{{ u('book/') }}"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book appointment" data-hi="अपॉइंटमेंट बुक करें"></span></a>
+          <a class="btn outline-light" href="{{ site.directions_url }}" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span data-en="Get directions" data-hi="रास्ता देखें"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <div>
+        <a class="brand" href="{{ u('') }}"><img src="/assets/logo-104.webp" width="54" height="54" loading="lazy" data-alt-en="Hospital logo" data-alt-hi="अस्पताल का लोगो"><span><strong data-en="Rajendra N.N. Hospital" data-hi="राजेन्द्र एन.एन. अस्पताल"></strong></span></a>
+        <address>{{ site.address.line1|l }}<br>{{ site.address.line2|l }}</address>
+        <p class="foot-tel"><a href="tel:{{ site.phone }}">{{ site.phone_display }}</a></p>
+      </div>
+      <nav data-aria-en="Care" data-aria-hi="देखभाल">
+        <h2 class="foot-h" data-en="Care" data-hi="देखभाल"></h2>
+        <ul>
+          <li><a href="{{ u('departments/') }}" data-en="Departments" data-hi="विभाग"></a></li>
+          <li><a href="{{ u('doctors/') }}" data-en="Find a doctor" data-hi="डॉक्टर खोजें"></a></li>
+          <li><a href="{{ u('health-checkups/') }}" data-en="Health check-ups" data-hi="हेल्थ चेक-अप"></a></li>
+          <li><a href="{{ u('lab-tests/') }}" data-en="Lab tests & prices" data-hi="लैब जाँच और कीमतें"></a></li>
+          <li><a href="{{ u('emergency/') }}" data-en="Emergency" data-hi="आपातकालीन सेवा"></a></li>
+        </ul>
+      </nav>
+      <nav data-aria-en="Patients" data-aria-hi="मरीज़">
+        <h2 class="foot-h" data-en="Patients" data-hi="मरीज़"></h2>
+        <ul>
+          <li><a href="{{ u('book/') }}" data-en="Book appointment" data-hi="अपॉइंटमेंट बुक करें"></a></li>
+          <li><a href="{{ u('my-appointments/') }}" data-en="My appointments" data-hi="मेरे अपॉइंटमेंट"></a></li>
+          <li><a href="{{ u('patients-visitors/') }}" data-en="Patients & visitors" data-hi="मरीज़ और आगंतुक"></a></li>
+          <li><a href="{{ u('patients-visitors/') }}#insurance" data-en="Insurance & TPA" data-hi="बीमा और TPA"></a></li>
+        </ul>
+      </nav>
+      <nav data-aria-en="Hospital" data-aria-hi="अस्पताल">
+        <h2 class="foot-h" data-en="Hospital" data-hi="अस्पताल"></h2>
+        <ul>
+          <li><a href="{{ u('about/') }}" data-en="About us" data-hi="हमारे बारे में"></a></li>
+          <li><a href="{{ u('contact/') }}" data-en="Contact & location" data-hi="संपर्क और पता"></a></li>
+          <li><a href="{{ site.instagram_url }}" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="{{ site.listing_url }}" target="_blank" rel="noopener" data-en="Google listing" data-hi="Google लिस्टिंग"></a></li>
+          <li><a href="{{ alt_href }}" hreflang="{{ alt_lang }}" lang="{{ alt_lang }}" data-en="हिंदी में देखें" data-hi="View in English"></a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">{{ year }}</span> <span data-en="Rajendra N.N. Hospital" data-hi="राजेन्द्र एन.एन. अस्पताल"></span></span>
+      <span data-en="Appointments are confirmed by the hospital by phone. Healthcare images on this site are AI illustrations." data-hi="अपॉइंटमेंट की पुष्टि अस्पताल फ़ोन पर करता है। इस साइट पर स्वास्थ्य सेवा चित्र AI से बनाए गए हैं।"></span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobilebar" data-aria-en="Quick actions" data-aria-hi="त्वरित संपर्क">
+  <a class="btn" href="tel:{{ site.phone }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span data-en="Call" data-hi="कॉल करें"></span></a>
+  <a class="btn ghost" href="{{ u('book/') }}"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span data-en="Book" data-hi="बुक करें"></span></a>
+  <a class="btn ghost" href="{{ site.directions_url }}" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span data-en="Directions" data-hi="रास्ता"></span></a>
+</nav>
+
+{% include "partials/guide.html" %}
+
+<dialog class="search-dialog" id="search" aria-labelledby="search-label">
+  <div class="sd-in">
+    <div class="sd-field">
+      <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
+      <label class="sr-only" for="search-input" id="search-label" data-en="Search the site" data-hi="साइट में खोजें"></label>
+      <input id="search-input" type="search" autocomplete="off" spellcheck="false" data-ph-en="Search doctors, departments, tests…" data-ph-hi="डॉक्टर, विभाग, जाँच खोजें…">
+      <button class="close-dialog" id="search-close" type="button" data-aria-en="Close search" data-aria-hi="खोज बंद करें"><svg class="i" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="sd-results" id="search-results" role="listbox" data-aria-en="Search results" data-aria-hi="खोज परिणाम"></div>
+    <p class="sd-hint" data-en="Try “ultrasound”, “child”, “sugar” or a doctor’s name." data-hi="“अल्ट्रासाउंड”, “बच्चा”, “शुगर” या डॉक्टर का नाम खोजें।"></p>
+  </div>
+</dialog>
+
+<script src="/assets/js/site.js?v={{ version }}" defer></script>
+{% for s in scripts %}<script src="/assets/js/{{ s }}.js?v={{ version }}" defer></script>
+{% endfor %}
+</body>
+</html>

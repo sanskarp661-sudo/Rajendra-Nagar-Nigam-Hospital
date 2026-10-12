@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("Lab tests & prices", "लैब जाँच और कीमतें", "Know before you go.", "आने से पहले जानें।", "Search tests and scans, check the price, preparation and report time, and add them to a list to book together.", "जाँच और स्कैन खोजें, कीमत, तैयारी और रिपोर्ट का समय देखें, और साथ में बुक करने के लिए सूची में जोड़ें।", [("lab-tests/", "Lab tests", "लैब जाँच")]) }}
+<section class="list-sec">
+  <div class="wrap lab-layout">
+    <div>
+      <form class="finder" role="search" onsubmit="return false">
+        <div class="field grow">
+          <label for="lt-q" data-en="Search tests" data-hi="जाँच खोजें"></label>
+          <div class="input-ico">{{ m.ico('search') }}<input id="lt-q" type="search" autocomplete="off" data-ph-en="e.g. sugar, thyroid, ultrasound" data-ph-hi="जैसे शुगर, थायरॉइड, अल्ट्रासाउंड"></div>
+        </div>
+      </form>
+      <div class="filters" role="group" data-aria-en="Test categories" data-aria-hi="जाँच की श्रेणियाँ">
+        <button class="filter" type="button" data-lt-cat="all" aria-pressed="true" data-en="All" data-hi="सभी"></button>
+        {% for c in tests.categories %}<button class="filter" type="button" data-lt-cat="{{ c.id }}" aria-pressed="false">{{ c.name|l }}</button>{% endfor %}
+      </div>
+      <p class="result-count" role="status"><span id="lt-count">{{ tests.tests|length }} <span data-en="tests" data-hi="जाँच"></span></span> {{ m.sample() }}</p>
+      <div class="table-wrap">
+        <table class="lt-table" id="lt-table">
+          <thead><tr>
+            <th scope="col" data-en="Test" data-hi="जाँच"></th>
+            <th scope="col" data-en="Preparation" data-hi="तैयारी"></th>
+            <th scope="col" data-en="Report" data-hi="रिपोर्ट"></th>
+            <th scope="col" class="num" data-en="Price" data-hi="कीमत"></th>
+            <th scope="col"><span class="sr-only" data-en="Add to list" data-hi="सूची में जोड़ें"></span></th>
+          </tr></thead>
+          <tbody>
+          {% for t in tests.tests %}
+            {% set cat = (tests.categories|selectattr('id','equalto',t.cat)|first) %}
+            <tr data-id="{{ t.id }}" data-cat="{{ t.cat }}" data-search="{{ t.name|lower }} {{ cat.name.en|lower }} {{ cat.name.hi }}">
+              <th scope="row"><span class="t-name">{{ t.name }}</span><span class="t-cat">{{ cat.name|l }}</span></th>
+              <td>{% if t.fasting %}<span class="pill warn" data-en="Fasting" data-hi="खाली पेट"></span>{% else %}<span class="muted" data-en="None" data-hi="कोई नहीं"></span>{% endif %}</td>
+              <td>{% if t.tat == '1h' %}<span data-en="Within 1 hour" data-hi="1 घंटे में"></span>{% elif t.tat == '6h' %}<span data-en="Same day" data-hi="उसी दिन"></span>{% elif t.tat == '24h' %}<span data-en="Next day" data-hi="अगले दिन"></span>{% elif t.tat == '48h' %}<span data-en="2 days" data-hi="2 दिन"></span>{% else %}<span data-en="3 days" data-hi="3 दिन"></span>{% endif %}</td>
+              <td class="num"><b>{{ rupee(t.price) }}</b></td>
+              <td class="act"><button class="add-btn" type="button" data-add="{{ t.id }}" aria-pressed="false">{{ m.ico('plus') }}<span data-en="Add" data-hi="जोड़ें"></span></button></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="empty" id="lt-empty" hidden>{{ m.ico('search') }}<p data-en="No test matches. Try another word, or call the lab." data-hi="कोई जाँच नहीं मिली। दूसरा शब्द आज़माएँ, या लैब में कॉल करें।"></p></div>
+    </div>
+    <div class="basket card-box sticky" id="basket" aria-labelledby="basket-title">
+      <h2 class="h3" id="basket-title"><span data-en="Your test list" data-hi="आपकी जाँच सूची"></span> <span class="count-badge" id="basket-n">0</span></h2>
+      <ul class="basket-list" id="basket-list"></ul>
+      <p class="muted" id="basket-empty" data-en="Add tests to see the total and book them together." data-hi="कुल देखने और साथ में बुक करने के लिए जाँच जोड़ें।"></p>
+      <div class="basket-total" id="basket-total" hidden><span data-en="Estimated total" data-hi="अनुमानित कुल"></span><b id="basket-sum">₹0</b></div>
+      <p class="fine" id="basket-fast" hidden data-en="Some tests need 10–12 hours of fasting. Book a morning slot." data-hi="कुछ जाँच के लिए 10–12 घंटे खाली पेट रहना ज़रूरी है। सुबह का समय बुक करें।"></p>
+      <a class="btn block" id="basket-book" href="{{ u('book/') }}?type=lab" aria-disabled="true">{{ m.ico('calendar') }}<span data-en="Book these tests" data-hi="ये जाँच बुक करें"></span></a>
+      <button class="link" type="button" id="basket-clear" hidden data-en="Clear list" data-hi="सूची हटाएँ"></button>
+    </div>
+  </div>
+</section>
+{% endblock %}

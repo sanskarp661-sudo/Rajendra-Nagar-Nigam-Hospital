@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as m with context %}
+{% block main %}
+{{ m.page_head("Health check-ups", "हेल्थ चेक-अप", "Check in on your health.", "अपनी सेहत की जाँच करवाएँ।", "Packages for every stage of life. Each includes reports and a doctor consultation. Book online and come in the morning, fasting.", "जीवन के हर पड़ाव के लिए पैकेज। हर पैकेज में रिपोर्ट और डॉक्टर परामर्श शामिल है। ऑनलाइन बुक करें और सुबह खाली पेट आएँ।", [("health-checkups/", "Health check-ups", "हेल्थ चेक-अप")]) }}
+<section class="list-sec" aria-labelledby="pkg-list-title">
+  <div class="wrap">
+    <h2 class="sr-only" id="pkg-list-title" data-en="Packages" data-hi="पैकेज"></h2>
+    <div class="pkg-grid">
+      {% for p in packages %}{% include "partials/package_card.html" %}{% endfor %}
+    </div>
+  </div>
+</section>
+<section class="related alt">
+  <div class="wrap two-col prep">
+    <div>
+      <h2 class="h2-sm" data-en="Before your check-up" data-hi="चेक-अप से पहले"></h2>
+      <ul class="tick-list">
+        <li>{{ m.ico('check') }}<span data-en="Don’t eat for 10–12 hours before. Water is fine." data-hi="10–12 घंटे पहले से कुछ न खाएँ। पानी पी सकते हैं।"></span></li>
+        <li>{{ m.ico('check') }}<span data-en="Take your usual medicines unless your doctor says otherwise; bring the list." data-hi="डॉक्टर ने मना न किया हो तो अपनी सामान्य दवाएँ लें; उनकी सूची साथ लाएँ।"></span></li>
+        <li>{{ m.ico('check') }}<span data-en="Come between 7:30 and 10:30 AM, and allow 2–3 hours." data-hi="सुबह 7:30 से 10:30 के बीच आएँ, और 2–3 घंटे का समय रखें।"></span></li>
+        <li>{{ m.ico('check') }}<span data-en="Wear loose clothing; bring previous reports." data-hi="ढीले कपड़े पहनें; पिछली रिपोर्ट साथ लाएँ।"></span></li>
+      </ul>
+    </div>
+    <div class="card-box">
+      <h2 class="h3" data-en="Need tests that aren’t in a package?" data-hi="ऐसी जाँच चाहिए जो पैकेज में नहीं है?"></h2>
+      <p data-en="Pick individual tests from the lab price list and book them together." data-hi="लैब कीमत सूची से अलग-अलग जाँच चुनें और साथ में बुक करें।"></p>
+      <a class="btn" href="{{ u('lab-tests/') }}">{{ m.ico('flask') }}<span data-en="Lab tests & prices" data-hi="लैब जाँच और कीमतें"></span></a>
+    </div>
+  </div>
+</section>
+{% endblock %}
