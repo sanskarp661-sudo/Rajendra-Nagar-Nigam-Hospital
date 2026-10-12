@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rajendra-nn-hospital.khushi-ku25-27.chatgpt.site/sitemap.xml
