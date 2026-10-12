@@ -37,6 +37,7 @@ DIST = ROOT / "dist"
 PHONE = "+91-8757731665"
 INSTAGRAM = "https://www.instagram.com/rajendra_n_n_hospital/"
 GOOGLE_LISTING = "https://share.google/dV6MkkXfxDt6fWgJh"
+LAT, LNG = 23.3791183, 85.3159531  # from the hospital's Google Maps listing
 
 LANGS = {
     "en": {
@@ -138,11 +139,13 @@ def jsonld(lang):
         "priceRange": "₹500+",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Ratu Road Chowk",
+            "streetAddress": "Ratu Road Chowk, Judge Colony",
             "addressLocality": "Ranchi",
+            "postalCode": "834001",
             "addressRegion": "Jharkhand",
             "addressCountry": "IN",
         },
+        "geo": {"@type": "GeoCoordinates", "latitude": LAT, "longitude": LNG},
         "hasMap": GOOGLE_LISTING,
         "sameAs": [INSTAGRAM],
         "availableLanguage": ["en", "hi"],
